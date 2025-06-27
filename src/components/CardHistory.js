@@ -6,7 +6,7 @@ import { Avatar } from "react-native-paper"
 export function CardHistory({item}){
     return(
         <TouchableOpacity onPress={() => navigation.navigate("")}>
-            <View style={{flexDirection:"row", alignItems:"center", marginBlock:8, gap:10}}>
+            <View style={{flexDirection:"row", alignItems:"center", marginBlock:12, gap:10}}>
                 <Avatar.Image 
                     size={50} 
                     source={{uri: item.foto}} 
@@ -16,7 +16,7 @@ export function CardHistory({item}){
                     <Text style={{fontSize:16, marginBottom:4,fontWeight:600 }}>{item.nome}</Text>
                     <Text style={{fontSize:14,color:"#a1a1a1"}}>{item.email}</Text>
                 </View>
-                <Text>-{item.preco}</Text>
+                <Text style={{color:"red",fontSize:16,}}>-${item.preco}</Text>
             </View>
         </TouchableOpacity>
     )

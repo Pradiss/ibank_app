@@ -48,38 +48,54 @@ const styles = StyleSheet.create({
   buttonHome:{
     borderWidth:1,
     borderColor:"#ccc",
-    paddingHorizontal:26,
+    paddingHorizontal:24,
     paddingBlock:14,
     borderRadius:26,
     flexDirection:"row",
     alignItems:"center",
-    gap:8
-
+    gap:8,
+    //Sombra
+    backgroundColor: "#F3F3F3",
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.16 ,
+    shadowRadius: 3, 
+    elevation: 5, 
   },
+
   blocoCard:{
-   width: 300,
-    height: 150,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
-
-    // Sombra no iOS
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    // Sombra no Android
-    elevation: 8,
+    flexDirection:"row",
+    alignItems:"center",
+    marginBlock:12,
+    gap:8,
+    borderRadius:50,
+    borderWidth:1,
+    borderColor:"#ccc",
+    paddingHorizontal:6,
+    paddingRight:26,
+    paddingBlock:6,
+    marginHorizontal:8,
+    //Sombra
+    backgroundColor: "#F3F3F3",
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.16 ,
+    shadowRadius: 3, 
+    elevation: 5, 
   },
-  texto: {
-    fontSize: 16,
-    color: '#333',
-  },
-  
+  //Botão da home Rodondo
+  buttonCircle:{
+    borderWidth:1,
+    borderRadius:30,
+    padding:12,
+    borderColor:"#ccc",
+    backgroundColor: "#F3F3F3",
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.16 ,
+    shadowRadius: 3, 
+    elevation: 5,
+  }
 });
 
 export default styles 

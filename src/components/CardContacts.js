@@ -4,17 +4,19 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from "./Style";
 
 
-export function CarouselProfile({item}){
+export function CardContacts({item}){
     return(
         <TouchableOpacity onPress={() => navigation.navigate("")}>
-            <View 
-            style={styles.blocoCard}>
+            <View style={{flexDirection:"row", alignItems:"center", marginBlock:12, gap:14}}>
                 <Avatar.Image 
-                    size={46} 
+                    size={50} 
                     source={{uri: item.foto}} 
                     style={{ alignSelf: 'flex-start' }}     
                 />
-                <Text style={{fontSize:14 }}>{item.nome.split(" ")[0]}</Text>
+                <View style={{flex:1}}>
+                    <Text style={{fontSize:16,fontWeight:600 }}>{item.nome}</Text>
+                </View>
+                <MaterialCommunityIcons style={styles.icon} name="star-outline" size={24} color="#000"/>
             </View>
         </TouchableOpacity>
     )

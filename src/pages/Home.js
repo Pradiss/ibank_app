@@ -38,12 +38,12 @@ export default function Home({navigation}){
             />
 
             <Text style={{paddingTop:16,paddingBottom:8}}>Wallet Balance</Text>
-            <Text style={styles.price}>$ 31,298.92</Text>
+            <Text style={styles.price}>$ 31.298,92</Text>
 
 
             <View style={{marginBlock:12}}></View>
 
-            <View style={{flexDirection:"row", gap:16, alignItems:"center", justifyContent:"space-evenly"}}>
+            <View style={{flexDirection:"row", gap:12, alignItems:"center", justifyContent:"start"}}>
                 <Pressable style={styles.buttonHome}
                 onPress={() => navigation.navigate("Transaction")}>
                     <MaterialCommunityIcons style={styles.icon} name="arrow-up" size={24} color="#000"/>
@@ -56,7 +56,7 @@ export default function Home({navigation}){
                     <Text style={{fontSize:18}}>Receive</Text>
                 </Pressable>
 
-                <Pressable style={{borderWidth:1,borderRadius:30,padding:12, borderColor:"#ccc",}}
+                <Pressable style={styles.buttonCircle}
                 onPress={() => navigation.navigate("Pix")}>
                     <MaterialCommunityIcons style={styles.icon} name="menu" size={24} color="#000"/>
                 </Pressable>
@@ -66,8 +66,12 @@ export default function Home({navigation}){
         
             <Text style={styles.titleHome}>Quick Transaction</Text>
 
-            <View style={{flexDirection:"row", alignItems:"center"}}>
-            <MaterialCommunityIcons  name="bell" size={24} color="#000"/>
+            <View style={{flexDirection:"row", alignItems:"center", marginTop:16}}>
+
+            <Pressable style={styles.buttonCircle}
+                onPress={() => navigation.navigate("Pix")}>
+                    <MaterialCommunityIcons style={styles.icon} name="plus" size={24} color="#000"/>
+            </Pressable>
 
             <FlatList
             horizontal
@@ -84,13 +88,14 @@ export default function Home({navigation}){
             />
             </View>
             
+        
 
 
 
+            <View style={{marginBlock:12}}></View>
 
-            <View style={{marginBlock:14}}></View>
-
-            <View style={{flexDirection:"row", alignItems: "center", justifyContent:"space-between", marginBottom:8}}>
+            <View style={{flexDirection:"row", alignItems: "center",
+                justifyContent:"space-between", marginBottom:16}}>
             <Text style={styles.titleHome}> Transações Recentes</Text>
             <Text style={{fontSize:13, }}> Ver todos</Text>
 
@@ -105,7 +110,7 @@ export default function Home({navigation}){
                 />
             )}
             />
-       
+        
         </View>
     )
 }

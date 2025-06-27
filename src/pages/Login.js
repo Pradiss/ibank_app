@@ -10,7 +10,7 @@ export default function Login({navigation}){
 
 
     return(
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+   
         <View style={styles.container}>
             <View>
                 <Text style={styles.titleLogo} >iBank</Text>
@@ -30,6 +30,6 @@ export default function Login({navigation}){
             
             <Text></Text>
         </View>
-    </TouchableWithoutFeedback>
+ 
     )
 }
