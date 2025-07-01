@@ -95,7 +95,63 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.16 ,
     shadowRadius: 3, 
     elevation: 5,
-  }
+  },
+
+  //transação
+
+  cardCategory:{
+    borderWidth:1,
+    borderColor:"#ccc",
+    padding:24,
+    margin:8,
+    borderRadius:20,
+    alignItems:"center",
+    gap:8,
+  },
+
+  containerTransaction:{
+    padding:18,
+    borderWidth:1,
+    borderRadius:30,
+    borderColor:"#ccc",
+    //sombra
+     backgroundColor: "#F3F3F3",
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.16 ,
+    shadowRadius: 3, 
+    elevation: 5,
+  },
+  //botão transação 
+  buttonTrasanction:{
+    borderRadius:20,
+    height:55,
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor: "black",
+    padding:8,
+    color:"white"
+  },
+
+  //tela pos splash
+
+  backgroundScreenBlack:{
+   
+    borderTopLeftRadius:50,
+    borderTopRightRadius:50,
+    backgroundColor: '#232323',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding:40
+    },
+    backgroundScreen:{
+    flex: 1,
+    backgroundColor: '#F6F6F6',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop:50,
+    
+    },
 });
 
 export default styles 

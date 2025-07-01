@@ -12,17 +12,26 @@ export default function Login({navigation}){
     return(
    
         <View style={styles.container}>
-            <View>
+            <View style={{ paddingBottom:8, flexDirection:"row", gap:0, alignItems:"center"}}>
+                <Image
+                    source={require('../images/LogoGreen.png')}
+                    style={{ width: 40, height: 40 }}
+                    resizeMode="contain"
+                        />
                 <Text style={styles.titleLogo} >iBank</Text>
-                <Image 
-                Source={require('../images/LogoGreen.png')}
-                style={{ width: 100, height: 100 }}
-                resizeMode="contain"
-                />
+        
             </View>
+            <Image
+                source={require('../images/pig.png')}
+                style={{ width: 200, height: 200, paddingBlock:32, }}
+                resizeMode="contain"
+                    /> 
 
             <TextInput style={styles.input} placeholder=" Your E-mail" value={email} onChangeText={setEmail}></TextInput>
             <TextInput style={styles.input} placeholder=" Your Password" value={password} onChangeText={setPassword} ></TextInput>
+            <Text style={{color:"#000",fontSize:14,  fontWeight:400, textDecorationLine:"underline",}}>
+                        Esqueceu sua senha?
+                    </Text>
 
             <Pressable style={styles.buttonLogin} onPress={() => navigation.navigate("MyTabs") }>
                   <Text style={{fontSize:18,color:"#fff"}} > Get started </Text>

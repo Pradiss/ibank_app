@@ -1,15 +1,15 @@
 import {useEffect,useState} from "react"
-import {ScrollView, View, Text, TextInput, Pressable, FlatList} from "react-native"
+import {ScrollView, View, Text, TextInput, Pressable, FlatList ,TouchableOpacity,Image} from "react-native"
 import { useIsFocused } from "@react-navigation/native"
-
 import styles from "../components/Style"
 import axios from "axios"
 import { CardContacts } from "../components/CardContacts"
-
+import { MaterialCommunityIcons,MaterialIcons } from '@expo/vector-icons';
 
 
 export function Transaction({navigation}){
 
+    const [search,setSearch] = useState("")
     const [history, setHistory] = useState([])
     const isFocused = useIsFocused()
 
@@ -28,19 +28,43 @@ export function Transaction({navigation}){
 
         }
     },[isFocused])
+
+   
  
     return(
         
         <View style={{padding:16}}>
-            
-            
 
-            <TextInput style={styles.input} placeholder=" Your E-mail" ></TextInput>
-            <TextInput style={styles.input} placeholder=" Your Password"  ></TextInput>
+            <TextInput style={styles.input} 
+            placeholder="Nome, CPF/CNPJ ou chave pix" 
+            value={search} 
+            onChangeText={setSearch}
+            />            
+           
+           
+            <Text style={styles.titleHome}>Suggested</Text>
 
-            <Pressable style={styles.buttonLogin} onPress={() => navigation.navigate("Result") }>
-                  <Text style={{fontSize:18,color:"#fff"}} >Send</Text>
-            </Pressable>
+            <View style={{flexDirection:"row", paddingTop:16 }}>
+                <TouchableOpacity onPress={() => navigation.navigate("")}>
+                    <View style={styles.cardCategory }>
+                        
+                        <MaterialIcons style={styles.icon} name="pix" size={50} color="#000"/>
+
+                        <Text style={{fontSize:18}}>Pix</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => navigation.navigate("")}>
+                    <View style={styles.cardCategory}>
+                        <MaterialCommunityIcons style={styles.icon} name="qrcode-scan" size={50} color="#000"/>
+                        <Text style={{fontSize:18}}>Escanear</Text>
+                    </View>
+                </TouchableOpacity>
+
+                
+            
+            </View>
+            
 
             <View style={{flexDirection:"row", alignItems: "center",
                 justifyContent:"space-between", marginBlock:18}}>
@@ -50,7 +74,7 @@ export function Transaction({navigation}){
             </View>
 
             <FlatList
-            data={history.slice(0, 4)}
+            data={history}
             keyExtractor={(item) => item.idUsuario.toString()}
             renderItem={({item}) =>(
                 <CardContacts 

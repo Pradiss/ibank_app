@@ -37,7 +37,7 @@ export default function Home({navigation}){
             navigation={navigation}
             />
 
-            <Text style={{paddingTop:16,paddingBottom:8}}>Wallet Balance</Text>
+            <Text style={{paddingTop:18,paddingBottom:8, fontSize:16,fontWeight:500}}>Wallet Balance</Text>
             <Text style={styles.price}>$ 31.298,92</Text>
 
 
@@ -53,7 +53,7 @@ export default function Home({navigation}){
                 <Pressable style={styles.buttonHome}
                 onPress={() => navigation.navigate("Pix")}>
                     <MaterialCommunityIcons style={styles.icon} name="arrow-down" size={24} color="#000"/>
-                    <Text style={{fontSize:18}}>Receive</Text>
+                    <Text style={{fontSize:18}}>Receber</Text>
                 </Pressable>
 
                 <Pressable style={styles.buttonCircle}
@@ -64,7 +64,7 @@ export default function Home({navigation}){
 
             <View style={{marginBlock:12}}></View>
         
-            <Text style={styles.titleHome}>Quick Transaction</Text>
+            <Text style={styles.titleHome}>Transação Rápida</Text>
 
             <View style={{flexDirection:"row", alignItems:"center", marginTop:16}}>
 
@@ -97,7 +97,7 @@ export default function Home({navigation}){
             <View style={{flexDirection:"row", alignItems: "center",
                 justifyContent:"space-between", marginBottom:16}}>
             <Text style={styles.titleHome}> Transações Recentes</Text>
-            <Text style={{fontSize:13, }}> Ver todos</Text>
+            <Text style={{fontSize:13, }} > Ver todos</Text>
 
             </View>
             <FlatList

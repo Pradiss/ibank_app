@@ -32,9 +32,7 @@ export default function History({item, navigation}){
 
             <Text style={styles.titleHome}> Today </Text>
 
-
              <FlatList
-             
             data={history}
             keyExtractor={(item) => item.idUsuario.toString()}
             renderItem={({item}) =>(
@@ -44,7 +42,6 @@ export default function History({item, navigation}){
                 />
             )}
             />
-            
         </View>
     )
 }
