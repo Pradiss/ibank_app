@@ -4,9 +4,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from "./Style";
 
 
-export function CarouselProfile({item}){
+export function CarouselProfile({item, navigation}){
     return(
-        <TouchableOpacity onPress={() => navigation.navigate("")}>
+        <TouchableOpacity onPress={() => navigation.navigate("ScreenSend")}>
             <View 
             style={styles.blocoCard}>
                 <Avatar.Image 

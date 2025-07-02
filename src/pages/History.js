@@ -28,9 +28,16 @@ export default function History({item, navigation}){
 
     return(
         <View style={{padding:16}} >
-            <TextInput style={styles.input} placeholder="Search Transaction" />
+            <Text style={{paddingTop:18,paddingBottom:8, fontSize:16,fontWeight:500}}>Saldo Disponivel</Text>
+            <Text style={styles.price}>$ 31.298,92</Text>
 
-            <Text style={styles.titleHome}> Today </Text>
+
+
+            <Text style={[styles.titleHome, {paddingBlock:16}]}>Extrato </Text>
+            <TextInput style={styles.input} placeholder="Procurar historico" />
+
+            <Text style={[styles.titleHome, {paddingBlock:16}]}>Ontem </Text>
+            <View style={{borderBottomColor: '#ccc',borderBottomWidth:1,}}/>
 
              <FlatList
             data={history}

@@ -3,7 +3,6 @@ import {  Text, View } from 'react-native';
 import { Provider as PaperProvider  } from 'react-native-paper';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Transaction } from './src/pages/Transaction';
 import { NavigationContainer } from '@react-navigation/native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,6 +16,10 @@ import SendMoney from './src/pages/SendMoney';
 import Result from './src/pages/Result';
 import Create from './src/pages/Create';
 import FormSend from './src/pages/FormSend';
+import ScreenSend from './src/pages/ScreenSend';
+import { Contacts } from './src/pages/Contatos';
+import ScreenScan from './src/pages/ScreenScan';
+import EditKeyPix from './src/pages/EditKeyPix';
 
 
 const Stack = createNativeStackNavigator()
@@ -31,9 +34,9 @@ function MyTabs(){
         tabBarIcon: ({color, size }) =>{
           let iconName
           if(route.name === "Home") iconName = "home"
-           else if (route.name === "Extrato") iconName = "menu"
-           else if (route.name === "Profile") iconName = "account-circle-outline"
-           else if (route.name === "Transaction") iconName = "transfer"
+           else if (route.name === "Extrato") iconName = "file-document-outline"
+           else if (route.name === "Perfil") iconName = "account-circle-outline"
+           else if (route.name === "Contatos") iconName = "contacts-outline"
           return <MaterialCommunityIcons name={iconName} size={size} color={color} />
         },
         
@@ -62,9 +65,9 @@ function MyTabs(){
       })}
       >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Transaction" component={Transaction} options={{headerShown: true}}/>
+      <Tab.Screen name="Contatos" component={Contacts} options={{headerShown: true}}/>
       <Tab.Screen name="Extrato" component={History} options={{headerShown: true}} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Perfil" component={Profile} />
 
     </Tab.Navigator>
   )
@@ -80,10 +83,13 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="MyTabs" component={MyTabs} />
           <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="Result" component={Result} />
+          <Stack.Screen name="Resultado" component={Result} />
           <Stack.Screen name="Send Money" component={SendMoney} />
           <Stack.Screen name="Create" component={Create}  />
           <Stack.Screen name="Send" component={FormSend}  />
+          <Stack.Screen name="ScreenSend" component={ScreenSend}  />
+          <Stack.Screen name="Scan" component={ScreenScan} options={{headerShown:true}} />
+          <Stack.Screen name="Editar Chave" component={EditKeyPix} options={{headerShown:true}} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

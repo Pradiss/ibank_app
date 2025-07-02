@@ -1,12 +1,12 @@
 import react,{useEffect, useState} from "react"
-import { View, Text, Pressable, FlatList, Alert, ScrollView } from "react-native" 
+import { View, Text, Pressable, FlatList, Alert, ScrollView,TouchableOpacity } from "react-native" 
 import styles from "../components/Style"
 import AvatarProfile from "../components/AvatarProfile"
 import { CardHistory } from "../components/CardHistory"
 import axios from "axios"
 import { Cards } from "../components/Cards"
 import { useIsFocused } from "@react-navigation/native"
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { CarouselProfile } from "../components/CarouselProfile"
 
 export default function Home({navigation}){
@@ -41,25 +41,34 @@ export default function Home({navigation}){
             <Text style={styles.price}>$ 31.298,92</Text>
 
 
-            <View style={{marginBlock:12}}></View>
+            <View style={{marginTop:12}}></View>
 
-            <View style={{flexDirection:"row", gap:12, alignItems:"center", justifyContent:"start"}}>
-                <Pressable style={styles.buttonHome}
-                onPress={() => navigation.navigate("Transaction")}>
-                    <MaterialCommunityIcons style={styles.icon} name="arrow-up" size={24} color="#000"/>
-                    <Text style={{fontSize:18}}>Enviar</Text>
-                </Pressable>
-            
-                <Pressable style={styles.buttonHome}
-                onPress={() => navigation.navigate("Pix")}>
-                    <MaterialCommunityIcons style={styles.icon} name="arrow-down" size={24} color="#000"/>
-                    <Text style={{fontSize:18}}>Receber</Text>
-                </Pressable>
+            <View style={{flexDirection:"row", justifyContent:"space-around"}}>
+                <TouchableOpacity onPress={() => navigation.navigate("ScreenSend")}>
+                    <View style={styles.cardCategory }>
+                        
+                        <MaterialIcons style={styles.icon} name="pix" size={40} color="#000"/>
 
-                <Pressable style={styles.buttonCircle}
-                onPress={() => navigation.navigate("Pix")}>
-                    <MaterialCommunityIcons style={styles.icon} name="menu" size={24} color="#000"/>
-                </Pressable>
+                        <Text style={{fontSize:14}}>Transferir Pix</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => navigation.navigate("Scan")}>
+                    <View style={styles.cardCategory}>
+                        <MaterialCommunityIcons style={styles.icon} name="qrcode-scan" size={40} color="#000"/>
+                        <Text style={{fontSize:14}}>Ler  QrCode</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Editar Chave")}>
+                    <View style={styles.cardCategory }>
+                        
+                        <MaterialIcons style={styles.icon} name="key" size={40} color="#000"/>
+
+                        <Text style={{fontSize:14}}>Editar Chave 
+                            
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
 
             <View style={{marginBlock:12}}></View>
@@ -68,10 +77,10 @@ export default function Home({navigation}){
 
             <View style={{flexDirection:"row", alignItems:"center", marginTop:16}}>
 
-            <Pressable style={styles.buttonCircle}
+            {/* <Pressable style={styles.buttonCircle}
                 onPress={() => navigation.navigate("Pix")}>
                     <MaterialCommunityIcons style={styles.icon} name="plus" size={24} color="#000"/>
-            </Pressable>
+            </Pressable> */}
 
             <FlatList
             horizontal
@@ -88,16 +97,12 @@ export default function Home({navigation}){
             />
             </View>
             
-        
-
-
-
             <View style={{marginBlock:12}}></View>
 
             <View style={{flexDirection:"row", alignItems: "center",
                 justifyContent:"space-between", marginBottom:16}}>
             <Text style={styles.titleHome}> Transações Recentes</Text>
-            <Text style={{fontSize:13, }} > Ver todos</Text>
+            <Text style={{fontSize:13, }} onPress={() => navigation.navigate("Extrato")} > Ver todos</Text>
 
             </View>
             <FlatList

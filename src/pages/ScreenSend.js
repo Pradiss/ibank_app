@@ -4,7 +4,7 @@ import { CardContacts } from "../components/CardContacts"
 import styles from "../components/Style"
 import { useIsFocused } from "@react-navigation/native"
 
-export default function SendMoney({navigation}){
+export default function ScreenSend({navigation}){
 
     const [history, setHistory] = useState([])
     const isFocused = useIsFocused()
@@ -27,32 +27,25 @@ export default function SendMoney({navigation}){
 
 
     return(
-        <View style={{paddingTop:56}}>
-
-
-            <View style={styles.containerTransaction}>
-                <Text>Qual é o valor da transferencia?</Text>
-                <TextInput style={styles.input} placeholder="Valor R$ " ></TextInput>
-                <Text>Qual é o valor da transferencia?</Text>
-                <TextInput style={styles.input} placeholder=" Your E-mail" ></TextInput>
-                <TextInput style={styles.input} placeholder=" Your Password"  ></TextInput>
-
-                <Pressable style={styles.buttonLogin} onPress={() => navigation.navigate("Resultado") }>
-                  <Text style={{fontSize:18,color:"#fff"}} >Send</Text>
-                </Pressable>
-
-            </View>
+        <View style={{paddingTop:56, paddingHorizontal:16}}>
 
             
+            <Text style={styles.titleHome}>Para quem você quer transferir R$ 00,00? </Text>
+            <Text>Encontre um contato na sua lista ou inicie uma nova transferencia</Text>
+            <TextInput style={styles.input}  placeholder="Nome, CPF/CNPJ ou chave pix"/>
+
+
+            <Text>Contatos frequentes</Text>
+
+
+        
             <View style={{flexDirection:"row", alignItems: "center",
                 justifyContent:"space-between", marginBlock:18}}>
             <Text style={styles.titleHome}>Contatos</Text>
-            {/* <Text style={{fontSize:13, }}> Ver todos</Text> */}
-
-            </View>
-
+                <Text style={{fontSize:13, }}> Ver todos</Text> 
+            </View> 
             <FlatList
-            data={history.slice(0, 4)}
+            data={history}
             keyExtractor={(item) => item.idUsuario.toString()}
             renderItem={({item}) =>(
                 <CardContacts 
@@ -61,8 +54,6 @@ export default function SendMoney({navigation}){
                 />
             )}
             />            
-
-            
         </View>
     )
 }

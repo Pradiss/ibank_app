@@ -3,10 +3,10 @@ import { Avatar } from "react-native-paper"
 
 
 
-export function CardHistory({item}){
+export function CardHistory({item,navigation}){
     return(
-        <TouchableOpacity onPress={() => navigation.navigate("")}>
-            <View style={{flexDirection:"row", alignItems:"center", marginBlock:12, gap:10}}>
+        <TouchableOpacity onPress={() => navigation.navigate("Extrato")}>
+            <View style={{flexDirection:"row", alignItems:"center", marginBlock:18, gap:10}}>
                 <Avatar.Image 
                     size={50} 
                     source={{uri: item.foto}} 
@@ -18,6 +18,7 @@ export function CardHistory({item}){
                 </View>
                 <Text style={{color:"red",fontSize:16,}}>-${item.preco}</Text>
             </View>
+                <View style={{borderBottomColor: '#ccc',borderBottomWidth:1,marginVertical: 10,}}/>
         </TouchableOpacity>
     )
 }

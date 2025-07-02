@@ -30,10 +30,10 @@ export default function AvatarProfile(){
             <MaterialCommunityIcons style={styles.icon} name="eye" size={24} color="#000"
             onPress={() => navigation.navigate("Notification")}
             />
-            
+{/*             
             <MaterialCommunityIcons style={styles.icon} name="bell" size={24} color="#000"
             onPress={() => navigation.navigate("Notification")}
-            />
+            /> */}
 
         </View>
         </View>

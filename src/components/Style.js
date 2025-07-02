@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   blocoCard:{
     flexDirection:"row",
     alignItems:"center",
-    marginBlock:12,
+    margin:8,
     gap:8,
     borderRadius:50,
     borderWidth:1,
@@ -102,11 +102,18 @@ const styles = StyleSheet.create({
   cardCategory:{
     borderWidth:1,
     borderColor:"#ccc",
-    padding:24,
+    padding:16,
     margin:8,
     borderRadius:20,
     alignItems:"center",
     gap:8,
+     backgroundColor: "#F3F3F3",
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.16 ,
+    shadowRadius: 3, 
+    elevation: 5,
+
   },
 
   containerTransaction:{
@@ -152,6 +159,30 @@ const styles = StyleSheet.create({
     paddingTop:50,
     
     },
+
+    ///Perfil button
+
+    buttonPerfil:{
+    borderRadius:30,
+    width:340,
+    margin:8,
+    height:85,
+    borderWidth:1,
+    borderColor:"#ccc",
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor: "#F3F3F3",
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.16 ,
+    shadowRadius: 3, 
+    elevation: 5,
+    },
+    textButtonPerfil:{
+      color:"black",
+      fontSize:18,
+      fontWeight:500
+    }
 });
 
 export default styles 
