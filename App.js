@@ -12,14 +12,13 @@ import Login from './src/pages/Login';
 import Home from './src/pages/Home';
 import Splash from './src/pages/Splash';
 import Register from './src/pages/Register';
-import SendMoney from './src/pages/SendMoney';
 import Result from './src/pages/Result';
-import Create from './src/pages/Create';
-import FormSend from './src/pages/FormSend';
+import Create from './src/pages/Account';
 import ScreenSend from './src/pages/ScreenSend';
 import { Contacts } from './src/pages/Contatos';
 import ScreenScan from './src/pages/ScreenScan';
 import EditKeyPix from './src/pages/EditKeyPix';
+import ForwardPassword from './src/pages/ForwardPassword';
 
 
 const Stack = createNativeStackNavigator()
@@ -78,18 +77,17 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Navigator initialRouteName='Splash' screenOptions={{headerShown: false}}>
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="MyTabs" component={MyTabs} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Resultado" component={Result} />
-          <Stack.Screen name="Send Money" component={SendMoney} />
           <Stack.Screen name="Create" component={Create}  />
-          <Stack.Screen name="Send" component={FormSend}  />
-          <Stack.Screen name="ScreenSend" component={ScreenSend}  />
+          <Stack.Screen name="ScreenSend" component={ScreenSend} options={{headerShown:true}} />
           <Stack.Screen name="Scan" component={ScreenScan} options={{headerShown:true}} />
           <Stack.Screen name="Editar Chave" component={EditKeyPix} options={{headerShown:true}} />
+          <Stack.Screen name="ForwardPassword" component={ForwardPassword}  />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

@@ -13,33 +13,36 @@ export default function Register({navigation}){
    
         <View style={styles.container}>
 
-            <View style={{ paddingBottom:8, flexDirection:"row", gap:0, alignItems:"center"}}>
+            <View style={{ paddingBottom:26, flexDirection:"row", gap:0, alignItems:"center"}}>
                 <Image
                     source={require('../images/LogoGreen.png')}
-                    style={{ width: 40, height: 40 }}
+                    style={{ width: 40, height: 40, }}
                     resizeMode="contain"
                         />
                 <Text style={styles.titleLogo} >iBank</Text>
             </View>
 
-            <Image
-                source={require('../images/pig.png')}
-                style={{ width: 200, height: 200, paddingBlock:32, }}
-                resizeMode="contain"
-                    /> 
 
-            <TextInput style={styles.input} placeholder=" Your E-mail" value={email} onChangeText={setEmail}></TextInput>
+            <TextInput style={styles.input} placeholder="Seu nome" ></TextInput>
+            <TextInput style={styles.input} placeholder="Seu E-mail" value={email} onChangeText={setEmail}></TextInput>
 
-            <TextInput style={styles.input} placeholder=" Your Password" value={password} onChangeText={setPassword} ></TextInput>
+            <TextInput style={styles.input} placeholder=" Your Password" ></TextInput>
+            <TextInput style={styles.input} placeholder=" Your Password" ></TextInput>
+            <TextInput style={styles.input} placeholder=" Your Password" ></TextInput>
 
-            <Text style={{color:"#000",fontSize:14,  fontWeight:400, textDecorationLine:"underline",}}>
-                Esqueceu sua senha?
-            </Text>
 
-            <Pressable style={styles.buttonLogin} onPress={() => navigation.navigate("MyTabs") }>
-                  <Text style={{fontSize:18,color:"#fff"}} > Get started </Text>
+            <Pressable style={styles.buttonLogin} onPress={() => navigation.navigate("Login") }>
+                  <Text style={{fontSize:18,color:"#fff"}} >Cadastrar </Text>
             </Pressable>
             
+             <View style={{flexDirection:"row" ,paddingBottom:50,paddingTop:12}}>
+                    <Text style={{fontSize:14, marginTop:16, fontWeight:400}}>
+                        Já tem uma conta?
+                    </Text>
+                    <Text 
+                    style={{color:"#000",fontSize:15, marginTop:16, fontWeight:500, textDecorationLine:"underline"}} 
+                    onPress={() => navigation.navigate("Login")}> Login</Text>
+                </View>
             
         </View>
  

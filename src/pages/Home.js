@@ -8,31 +8,41 @@ import { Cards } from "../components/Cards"
 import { useIsFocused } from "@react-navigation/native"
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { CarouselProfile } from "../components/CarouselProfile"
+import { apiClient } from "../components/Services/Api"
 
 export default function Home({navigation}){
 
     const [history, setHistory] = useState([])
+    const [users, setUsers] = useState([])
     const isFocused = useIsFocused()
 
 
-    const LoadingHistory = async () =>{
+   
+
+
+    const LoadingUsers = async () => {
         try{
-            const res = await axios.get("https://erick5457.c44.integrator.host/api/usuarios")
-            setHistory(res.data)
-        }catch(e){
-            Alert.alert("Erro ao carregar Historico", e.message)
+            const response = await apiClient.get("/",{
+                headers:{
+                    'id-bank': '02',
+                }
+            })
+            setUsers(response.data)
+        }catch(error){
+            Alert.alert("erro ao carregar usuario", error)
         }
     }
+
     useEffect(() => {
         
         if(isFocused){
-            LoadingHistory()
-
+            
+            LoadingUsers()
         }
     },[isFocused])
 
     return(
-        <View style={{paddingTop:50, padding:16}}>
+        <View style={{paddingTop:50,paddingHorizontal:16}}>
             <AvatarProfile 
             navigation={navigation}
             />
@@ -77,17 +87,18 @@ export default function Home({navigation}){
 
             <View style={{flexDirection:"row", alignItems:"center", marginTop:16}}>
 
-            {/* <Pressable style={styles.buttonCircle}
-                onPress={() => navigation.navigate("Pix")}>
+             <Pressable style={styles.buttonCircle}
+                onPress={() => navigation.navigate("ScreenSend")}>
                     <MaterialCommunityIcons style={styles.icon} name="plus" size={24} color="#000"/>
-            </Pressable> */}
+            </Pressable> 
 
             <FlatList
+            
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            data={history}
-            keyExtractor={(item) => item.idUsuario.toString()}
+            data={users}
+            keyExtractor={(item) => item.id_client.toString()}
             renderItem={({item}) =>(
                 <CarouselProfile
                 item={item}
@@ -106,8 +117,8 @@ export default function Home({navigation}){
 
             </View>
             <FlatList
-            data={history.slice(0, 4)}
-            keyExtractor={(item) => item.idUsuario.toString()}
+            data={users.slice(0, 4)}
+            keyExtractor={(item) => item.id_client.toString()}
             renderItem={({item}) =>(
                 <CardHistory 
                 item={item}

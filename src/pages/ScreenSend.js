@@ -1,5 +1,5 @@
 import react,{useEffect, useState} from "react"
-import { View, Text, TextInput, Pressable ,FlatList} from "react-native" 
+import { View, Text, TextInput, Pressable ,FlatList, Image} from "react-native" 
 import { CardContacts } from "../components/CardContacts"
 import styles from "../components/Style"
 import { useIsFocused } from "@react-navigation/native"
@@ -27,33 +27,33 @@ export default function ScreenSend({navigation}){
 
 
     return(
-        <View style={{paddingTop:56, paddingHorizontal:16}}>
+        <View style={{paddingHorizontal:16,alignItems:"center"}}>
 
-            
-            <Text style={styles.titleHome}>Para quem você quer transferir R$ 00,00? </Text>
-            <Text>Encontre um contato na sua lista ou inicie uma nova transferencia</Text>
-            <TextInput style={styles.input}  placeholder="Nome, CPF/CNPJ ou chave pix"/>
-
-
-            <Text>Contatos frequentes</Text>
-
-
-        
-            <View style={{flexDirection:"row", alignItems: "center",
-                justifyContent:"space-between", marginBlock:18}}>
-            <Text style={styles.titleHome}>Contatos</Text>
-                <Text style={{fontSize:13, }}> Ver todos</Text> 
-            </View> 
-            <FlatList
-            data={history}
-            keyExtractor={(item) => item.idUsuario.toString()}
-            renderItem={({item}) =>(
-                <CardContacts 
-                item={item}
-                navigation={navigation}
+            <Image
+                source={require('../images/pig.png')}
+                style={{ width: 200, height: 200, paddingBlock:32,}}
+                resizeMode="contain"
                 />
-            )}
-            />            
+
+            <Text style={styles.titleHome}>Para quem você quer transferir o pix? </Text>
+            <Text style={{paddingBlock:8,paddingHorizontal:16}}>Encontre um contato na sua lista ou inicie uma nova transferencia</Text>
+            <TextInput style={[styles.input,{marginTop:16}]}  placeholder="Nome, CPF/CNPJ ou chave pix"/>
+
+            <TextInput style={styles.input}  placeholder="Valor R$"/>
+                <Pressable style={{borderRadius:20,
+                    width:"100%",
+                    height:55,
+                    justifyContent:"center",
+                    alignItems:"center",
+                    marginTop:32,
+                    backgroundColor: "black",
+                    padding:8,
+                    color:"white"}} onPress={() => navigation.navigate("MyTabs") }>
+                  <Text style={{fontSize:18,color:"#fff"}} >Enviar Pix </Text>
+            </Pressable>
+        
+            
+                       
         </View>
     )
 }

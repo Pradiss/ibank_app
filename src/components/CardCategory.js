@@ -11,10 +11,10 @@ export function CardCategory({item}){
             style={styles.cardCategory}>
                 <Avatar.Image 
                     size={46} 
-                    source={{uri: item.foto}} 
+                    source={require('../images/avatar.png')} 
                     style={{ alignSelf: 'flex-start' }}     
                 />
-                <Text style={{fontSize:14 }}>{item.nome.split(" ")[0]}</Text>
+                <Text style={{fontSize:14 }}>{item.name.split(" ")[0]}</Text>
             </View>
         </TouchableOpacity>
     )

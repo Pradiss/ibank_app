@@ -4,7 +4,7 @@ import { Avatar } from "react-native-paper"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from "../components/Style"
 
-export default function AvatarProfile(){
+export default function AvatarProfile({navigation,item}){
 
     const [users,setUsers] = useState("")
 
@@ -12,7 +12,7 @@ export default function AvatarProfile(){
     return(
         <View style={{flexDirection:"row", marginBlock:8, alignItems:"center", justifyContent:"space-between" }}>
             
-        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
         <View style={{flexDirection:"row",justifyContent:"center"}}>
                 <Avatar.Image 
                 size={50} 
@@ -21,7 +21,7 @@ export default function AvatarProfile(){
                 />
                 <View style={{justifyContent:"center", padding:8,}}>
                      <Text >Welcome</Text>
-                    <Text  style={{fontSize: 18, fontWeight: 'bold', marginTop:4}} onPress={() => navigation.navigate("Profile")}> Hi, Erick </Text>
+                    <Text  style={{fontSize: 18, fontWeight: 'bold', marginTop:4}} onPress={() => navigation.navigate("Perfil")}> Hi, Erick </Text>
                 </View>
         </View>
         </TouchableOpacity>

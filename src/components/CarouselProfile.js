@@ -10,11 +10,12 @@ export function CarouselProfile({item, navigation}){
             <View 
             style={styles.blocoCard}>
                 <Avatar.Image 
-                    size={46} 
-                    source={{uri: item.foto}} 
+                    size={46}
+                    
+                    source={require('../images/avatar.png')} 
                     style={{ alignSelf: 'flex-start' }}     
                 />
-                <Text style={{fontSize:14 }}>{item.nome.split(" ")[0]}</Text>
+                <Text style={{fontSize:14 ,fontWeight:600}}>{item.name}</Text>
             </View>
         </TouchableOpacity>
     )

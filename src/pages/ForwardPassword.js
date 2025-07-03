@@ -3,7 +3,7 @@ import { View, Text, Pressable, TextInput, Image, Keyboard } from "react-native"
 import styles from "../components/Style"
 import { TouchableWithoutFeedback } from "react-native-web"
 
-export default function Login({navigation}){
+export default function ForwardPassword({navigation}){
 
     const [email,setEmail] = useState([])
     const [password,setPassword] = useState([])
@@ -28,18 +28,14 @@ export default function Login({navigation}){
                 resizeMode="contain"
                     /> 
 
-            <TextInput style={styles.input} placeholder=" Your E-mail" value={email} onChangeText={setEmail}></TextInput>
+            <TextInput style={styles.input} placeholder="Digite sua Senha Nova" ></TextInput>
 
-            <TextInput style={styles.input} placeholder=" Your Password" value={password} onChangeText={setPassword} ></TextInput>
+            <TextInput style={styles.input} placeholder="Confirme sua Senha"  ></TextInput>
 
-            <Text style={{color:"#000",fontSize:16,  fontWeight:400, textDecorationLine:"underline",}}
-            onPress={()=>navigation.navigate("ForwardPassword")}
-            >
-                Esqueceu sua senha?
-            </Text>
+            
 
-            <Pressable style={styles.buttonLogin} onPress={() => navigation.navigate("MyTabs") }>
-                  <Text style={{fontSize:18,color:"#fff"}} > Entrar </Text>
+            <Pressable style={styles.buttonLogin} onPress={() => navigation.navigate("Login") }>
+                  <Text style={{fontSize:18,color:"#fff"}} > Mudar senha </Text>
             </Pressable>
             
             

@@ -1,8 +1,8 @@
 import react,{useEffect, useState} from "react"
 import { View, Text, TextInput , FlatList, Alert} from "react-native" 
 import styles from "../components/Style"
-import axios from "axios"
 import { CardHistory } from "../components/CardHistory"
+import { apiClient } from "../components/Services/Api"
 import { useIsFocused } from "@react-navigation/native"
 
 export default function History({item, navigation}){
@@ -12,7 +12,11 @@ export default function History({item, navigation}){
 
     const LoadingHistory = async () =>{
         try{
-            const res = await axios.get("https://erick5457.c44.integrator.host/api/usuarios")
+            const res = await apiClient.get("/",{
+                headers:{
+                    'id-bank': '02',
+                }
+            })
             setHistory(res.data)
         }catch(e){
             Alert.alert("Erro ao carregar Historico", e.message)
@@ -41,7 +45,7 @@ export default function History({item, navigation}){
 
              <FlatList
             data={history}
-            keyExtractor={(item) => item.idUsuario.toString()}
+            keyExtractor={(item) => item.id_client.toString()}
             renderItem={({item}) =>(
                 <CardHistory 
                 item={item}

@@ -4,17 +4,17 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from "./Style";
 
 
-export function CardContacts({item}){
+export function CardContacts({item,navigation}){
     return(
-        <TouchableOpacity onPress={() => navigation.navigate("")}>
+        <TouchableOpacity onPress={() => navigation.navigate("ScreenSend")}>
             <View style={{flexDirection:"row", alignItems:"center", marginBlock:12, gap:14}}>
                 <Avatar.Image 
                     size={50} 
-                    source={{uri: item.foto}} 
+                    source={require('../images/avatar.png')} 
                     style={{ alignSelf: 'flex-start' }}     
                 />
                 <View style={{flex:1}}>
-                    <Text style={{fontSize:16,fontWeight:600 }}>{item.nome}</Text>
+                    <Text style={{fontSize:16,fontWeight:600 }}>{item.name}</Text>
                 </View>
                 <MaterialCommunityIcons style={styles.icon} name="star-outline" size={24} color="#000"/>
             </View>

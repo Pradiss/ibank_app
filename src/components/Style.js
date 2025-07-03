@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     paddingHorizontal:6,
     paddingRight:26,
     paddingBlock:6,
-    marginHorizontal:8,
+   
     //Sombra
     backgroundColor: "#F3F3F3",
     shadowColor: "#000",
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     borderRadius:30,
     width:340,
     margin:8,
-    height:85,
+    height:75,
     borderWidth:1,
     borderColor:"#ccc",
     justifyContent:"center",
