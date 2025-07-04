@@ -11,6 +11,8 @@ import styles from "../components/Style";
 
 export default function ScreenSend({ navigation }) {
   return (
+
+  
     <View style={{ paddingHorizontal: 16, alignItems: "center" }}>
       <Image
         source={require("../images/pig.png")}
@@ -42,7 +44,7 @@ export default function ScreenSend({ navigation }) {
           padding: 8,
           color: "white",
         }}
-        onPress={() => navigation.navigate("MyTabs")}
+        onPress={() => navigation.navigate("Resultado")}
       >
         <Text style={{ fontSize: 18, color: "#fff" }}>Enviar Pix </Text>
       </Pressable>

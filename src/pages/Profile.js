@@ -40,6 +40,7 @@ export default function Profile({ navigation }) {
             borderRadius: 100,
             alignSelf: "center",
             marginBlock: 36,
+            backgroundColor:"#fff"
           }}
         />
         <Text style={{ fontSize: 38, fontWeight: 500, paddingBottom: 12 }}>

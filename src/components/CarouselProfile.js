@@ -10,9 +10,9 @@ export function CarouselProfile({ item, navigation }) {
         <Avatar.Image
           size={46}
           source={require("../images/avatar.png")}
-          style={{ alignSelf: "flex-start" }}
+          style={{ alignSelf: "flex-start",backgroundColor:"#232323" }}
         />
-        <Text style={{ fontSize: 14, fontWeight: 600 }}>{item.name}</Text>
+        <Text style={{ fontSize: 14, fontWeight: 600 }}>{item.name?.trim().split(/\s+/)[0]}</Text>
       </View>
     </TouchableOpacity>
   );

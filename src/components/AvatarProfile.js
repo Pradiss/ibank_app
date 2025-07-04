@@ -21,7 +21,7 @@ export default function AvatarProfile({ navigation, item }) {
           <Avatar.Image
             size={50}
             source={require("../images/avatar.png")}
-            style={{ alignSelf: "flex-start" }}
+            style={{ alignSelf: "flex-start",backgroundColor:"#fff" }}
           />
 
           <View style={{ justifyContent: "center", padding: 8 }}>

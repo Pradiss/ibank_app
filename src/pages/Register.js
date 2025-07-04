@@ -31,7 +31,6 @@ export default function Register({ navigation }) {
   const [country, setCountry] = useState([]);
 
   const Register = async () => {
-    
     try {
       const response = await apiClient.post(
         "/",
@@ -59,12 +58,11 @@ export default function Register({ navigation }) {
       navigation.navigate("Login");
 
       navigation.reset({
-            index: 0,
-            routes: [{ name: 'MyTabs' }],
-            })
-      
+        index: 0,
+        routes: [{ name: "MyTabs" }],
+      });
     } catch (error) {
-      Alert.alert("Erro ao criar um Usuario", error)
+      Alert.alert("Erro ao criar um Usuario", error);
     }
   };
 

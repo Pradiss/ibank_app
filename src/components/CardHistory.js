@@ -15,7 +15,7 @@ export function CardHistory({ item, navigation }) {
         <Avatar.Image
           size={50}
           source={require("../images/avatar.png")}
-          style={{ alignSelf: "flex-start" }}
+          style={{ alignSelf: "flex-start",backgroundColor:"#232323" }}
         />
 
         <View style={{ flex: 1 }}>

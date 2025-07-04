@@ -17,7 +17,7 @@ export function CardContacts({ item, navigation }) {
         <Avatar.Image
           size={50}
           source={require("../images/avatar.png")}
-          style={{ alignSelf: "flex-start" }}
+          style={{ alignSelf: "flex-start",backgroundColor:"#232323" }}
         />
         <View style={{ flex: 1 }}>
           <Text style={{ fontSize: 16, fontWeight: 600 }}>{item.name}</Text>

@@ -19,6 +19,7 @@ import ScreenSend from "./src/pages/ScreenSend";
 import ScreenScan from "./src/pages/ScreenScan";
 import EditKeyPix from "./src/pages/EditKeyPix";
 import ForwardPassword from "./src/pages/ForwardPassword";
+import FormRegister from "./src/pages/FormRegister";
 
 const Stack = createNativeStackNavigator();
 
@@ -92,6 +93,7 @@ export default function App() {
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Resultado" component={Result} />
           <Stack.Screen name="Create" component={Create} />
+          <Stack.Screen name="FormRegister" component={FormRegister} />
           <Stack.Screen
             name="ScreenSend"
             component={ScreenSend}

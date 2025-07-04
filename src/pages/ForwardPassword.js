@@ -12,7 +12,7 @@ import { TouchableWithoutFeedback } from "react-native-web";
 
 export default function ForwardPassword({ navigation }) {
   const [email, setEmail] = useState([]);
-  const [password, setPassword] = useState([]);
+  
 
   return (
     <View style={styles.container}>

@@ -1,7 +1,58 @@
-import { View, Text, TextInput, Pressable, Image } from "react-native";
+import react, { useEffect, useState } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import styles from "../components/Style";
 
-export default function Create({ navigation }) {
+export default function FormRegister({ navigation }) {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    cpf: "",
+    street: "",
+    number: "",
+    location: "",
+    cep: "",
+    city: "",
+    state: "",
+    country: "",
+  });
+
+  const nextPass = () => {
+    if (step < 4) setStep(step + 1);
+  };
+  const passBefore = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
+  const updateField = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+  const confirm = () => {
+    switch (step) {
+      case 1:
+        return (
+          <>
+            <TextInput
+              style={styles.input}
+              value={name}
+              onChangeText={setName}
+              placeholder="Seu nome"
+            />
+          </>
+        );
+    }
+  };
+
+  // #34E167 color verder
   return (
     <View style={styles.backgroundScreen}>
       <View>
@@ -13,48 +64,9 @@ export default function Create({ navigation }) {
       </View>
 
       <View style={styles.backgroundScreenBlack}>
-        <Text
-          style={{
-            fontSize: 42,
-            color: "#fff",
-            marginTop: 16,
-            fontWeight: 600,
-            textAlign: "center",
-          }}
-        >
-          Bem vindo ao iBank
-        </Text>
-
-        <Text
-          style={{
-            fontSize: 18,
-            color: "#c7c7c7",
-            marginTop: 16,
-            fontWeight: 400,
-            textAlign: "center",
-            marginBottom: 36,
-          }}
-        >
-          Cadastre-se
-        </Text>
-
         <Pressable
-          style={{
-            borderRadius: 20,
-            width: 320,
-            height: 55,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#34E167",
-            padding: 8,
-            borderColor: "#fff",
-            shadowColor: "#000",
-            shadowOffset: { width: 2, height: 6 },
-            shadowOpacity: 0.15,
-            shadowRadius: 3,
-            elevation: 5,
-          }}
-          onPress={() => navigation.navigate("FormRegister")}
+          style={styles.buttonForm}
+          onPress={() => navigation.navigate("Register")}
         >
           <Text style={{ fontSize: 18 }}>Criar uma conta </Text>
         </Pressable>

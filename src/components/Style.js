@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+// #34E167 color verder
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -177,6 +179,23 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 18,
     fontWeight: 500,
+  },
+  //botão dos formularios
+  
+  buttonForm: {
+    borderRadius: 20,
+    width: 320,
+    height: 55,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#34E167",
+    padding: 8,
+    borderColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 6 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+    elevation: 5,
   },
 });
 
