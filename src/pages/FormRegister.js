@@ -10,6 +10,18 @@ import {
 import styles from "../components/Style";
 
 export default function FormRegister({ navigation }) {
+  const [email, setEmail] = useState([]);
+  const [password, setPassword] = useState([]);
+  const [name, setName] = useState([]);
+  const [phone, setPhone] = useState([]);
+  const [cpf, setCpf] = useState([]);
+  const [street, setStreet] = useState([]);
+  const [number, setNumber] = useState([]);
+  const [location, setLocation] = useState([]);
+  const [cep, setCep] = useState([]);
+  const [city, setCity] = useState([]);
+  const [state, setState] = useState([]);
+  const [country, setCountry] = useState([]);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -26,6 +38,42 @@ export default function FormRegister({ navigation }) {
     country: "",
   });
 
+  const Register = async () => {
+    try {
+      const response = await apiClient.post(
+        "/",
+        {
+          name,
+          email,
+          password,
+          phone,
+          cpf,
+          street,
+          number,
+          location,
+          cep,
+          city,
+          state,
+          country,
+        },
+
+        {
+          headers: {
+            "id-bank": "2",
+          },
+        }
+      );
+      navigation.navigate("Login");
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "MyTabs" }],
+      });
+    } catch (error) {
+      Alert.alert("Erro ao criar um Usuario", error);
+    }
+  };
+
   const nextPass = () => {
     if (step < 4) setStep(step + 1);
   };
@@ -36,7 +84,13 @@ export default function FormRegister({ navigation }) {
   const updateField = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
+
   const confirm = () => {
+    console.log("Dados enviado", formData);
+    Alert.alert("Formulario enviado com sucesso ");
+  };
+
+  const steps = () => {
     switch (step) {
       case 1:
         return (
@@ -64,11 +118,8 @@ export default function FormRegister({ navigation }) {
       </View>
 
       <View style={styles.backgroundScreenBlack}>
-        <Pressable
-          style={styles.buttonForm}
-          onPress={() => navigation.navigate("Register")}
-        >
-          <Text style={{ fontSize: 18 }}>Criar uma conta </Text>
+        <Pressable style={styles.buttonForm} onPress={Register}>
+          <Text style={{ fontSize: 18 }}>Avançar </Text>
         </Pressable>
 
         <View
@@ -93,7 +144,6 @@ export default function FormRegister({ navigation }) {
             }}
             onPress={() => navigation.navigate("Login")}
           >
-            {" "}
             Login
           </Text>
         </View>
