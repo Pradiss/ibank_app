@@ -8,8 +8,7 @@ import { Cards } from "../components/Cards"
 import { useIsFocused } from "@react-navigation/native"
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { CarouselProfile } from "../components/CarouselProfile"
-import { apiClient } from "../components/Services/Api"
-
+import { apiClient } from "../Services/Api"
 export default function Home({navigation}){
 
     const [history, setHistory] = useState([])

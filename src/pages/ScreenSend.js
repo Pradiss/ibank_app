@@ -1,29 +1,10 @@
 import react,{useEffect, useState} from "react"
 import { View, Text, TextInput, Pressable ,FlatList, Image} from "react-native" 
-import { CardContacts } from "../components/CardContacts"
 import styles from "../components/Style"
-import { useIsFocused } from "@react-navigation/native"
 
 export default function ScreenSend({navigation}){
 
-    const [history, setHistory] = useState([])
-    const isFocused = useIsFocused()
-
-    const LoadingHistory = async () =>{
-        try{
-            const res = await axios.get("https://erick5457.c44.integrator.host/api/usuarios")
-            setHistory(res.data)
-        }catch(e){
-            Alert.alert("Erro ao carregar Historico", e.message)
-        }
-    }
-    useEffect(() => {
-        
-        if(isFocused){
-            LoadingHistory()
-
-        }
-    },[isFocused])
+    
 
 
     return(

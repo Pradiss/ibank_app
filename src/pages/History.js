@@ -2,7 +2,7 @@ import react,{useEffect, useState} from "react"
 import { View, Text, TextInput , FlatList, Alert} from "react-native" 
 import styles from "../components/Style"
 import { CardHistory } from "../components/CardHistory"
-import { apiClient } from "../components/Services/Api"
+import { apiClient } from "../Services/Api"
 import { useIsFocused } from "@react-navigation/native"
 
 export default function History({item, navigation}){

@@ -20,9 +20,9 @@ export default  function EditKeyPix({navigation}){
                 resizeMode="contain"
                     />  */}
 
-            <TextInput style={styles.input} placeholder="Chave pix antiga" ></TextInput>
+            <TextInput style={styles.input} placeholder="Chave pix antiga" />
 
-            <TextInput style={styles.input} placeholder="Chave pix nova"></TextInput>
+            <TextInput style={styles.input} placeholder="Chave pix nova"/>
 
             
             <Pressable style={styles.buttonLogin} onPress={() => navigation.navigate("MyTabs") }>

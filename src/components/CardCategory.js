@@ -3,12 +3,10 @@ import styles from "./Style"
 import { Avatar } from "react-native-paper"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-
 export function CardCategory({item}){
     return(
          <TouchableOpacity onPress={() => navigation.navigate("")}>
-            <View 
-            style={styles.cardCategory}>
+            <View style={styles.cardCategory}>
                 <Avatar.Image 
                     size={46} 
                     source={require('../images/avatar.png')} 

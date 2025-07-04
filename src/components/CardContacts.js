@@ -3,7 +3,6 @@ import { Avatar } from "react-native-paper"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from "./Style";
 
-
 export function CardContacts({item,navigation}){
     return(
         <TouchableOpacity onPress={() => navigation.navigate("ScreenSend")}>

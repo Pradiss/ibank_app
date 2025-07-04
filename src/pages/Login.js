@@ -28,11 +28,11 @@ export default function Login({navigation}){
                 resizeMode="contain"
                     /> 
 
-            <TextInput style={styles.input} placeholder=" Your E-mail" value={email} onChangeText={setEmail}></TextInput>
+            <TextInput style={styles.input} placeholder=" Your E-mail" value={email} onChangeText={setEmail}/>
 
-            <TextInput style={styles.input} placeholder=" Your Password" value={password} onChangeText={setPassword} ></TextInput>
+            <TextInput style={styles.input} placeholder=" Your Password" value={password} onChangeText={setPassword} />
 
-            <Text style={{color:"#000",fontSize:16,  fontWeight:400, textDecorationLine:"underline",}}
+            <Text style={{color:"#000",fontSize:16,paddingBottom:32,  fontWeight:400, textDecorationLine:"underline",}}
             onPress={()=>navigation.navigate("ForwardPassword")}
             >
                 Esqueceu sua senha?

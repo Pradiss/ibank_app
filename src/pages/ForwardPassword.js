@@ -28,9 +28,9 @@ export default function ForwardPassword({navigation}){
                 resizeMode="contain"
                     /> 
 
-            <TextInput style={styles.input} placeholder="Digite sua Senha Nova" ></TextInput>
+            <TextInput style={styles.input} placeholder="Digite sua Senha Nova" />
 
-            <TextInput style={styles.input} placeholder="Confirme sua Senha"  ></TextInput>
+            <TextInput style={styles.input} placeholder="Confirme sua Senha"  />
 
             
 

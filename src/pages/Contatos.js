@@ -4,8 +4,7 @@ import { useIsFocused } from "@react-navigation/native"
 import styles from "../components/Style"
 import { CardContacts } from "../components/CardContacts"
 import { MaterialCommunityIcons,MaterialIcons } from '@expo/vector-icons';
-import { apiClient } from "../components/Services/Api"
-
+import { apiClient } from "../Services/Api"
 
 export function Contacts({navigation}){
 

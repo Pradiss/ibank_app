@@ -5,7 +5,7 @@ import styles from "../components/Style"
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Avatar } from "react-native-paper";
 import axios from "axios";
-import { apiClient } from "../components/Services/Api";
+import { apiClient } from "../Services/Api";
 
 export default function Profile({navigation}){
     const [users, setUsers] = useState([])
