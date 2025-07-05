@@ -10,9 +10,10 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import styles from "../components/Style";
+import { Button } from "react-native-paper";
 
 export default function FormRegister({ navigation }) {
   const [email, setEmail] = useState([]);
@@ -47,20 +48,7 @@ export default function FormRegister({ navigation }) {
     try {
       const response = await apiClient.post(
         "/",
-        {
-          name,
-          email,
-          password,
-          phone,
-          cpf,
-          street,
-          number,
-          location,
-          cep,
-          city,
-          state,
-          country,
-        },
+        { ...formData },
 
         {
           headers: {
@@ -76,6 +64,28 @@ export default function FormRegister({ navigation }) {
       });
     } catch (error) {
       Alert.alert("Erro ao criar um Usuario", error);
+    }
+  };
+
+  const cepChange = async (cepValue) => {
+    updateField("cep", cepValue);
+
+    if (cepValue.length === 8) {
+      try {
+        const response = await fetch(
+          `https://viacep.com.br/ws/${cepValue}/json/`
+        );
+        const data = await response.json();
+
+        if (!data.erro) {
+          updateField("street", data.street);
+          updateField("location", data.location);
+          updateField("city", data.city);
+          updateField("state", data.state);
+        }
+      } catch (erro) {
+        console.warn("Erro ao consultar CEP:", erro);
+      }
     }
   };
 
@@ -95,6 +105,32 @@ export default function FormRegister({ navigation }) {
     Alert.alert("Formulario enviado com sucesso ");
   };
 
+  const formatPhone = (value) => {
+    const cleaned = value.replace(/\D/g, "").slice(0, 11);
+    if (cleaned.length <= 10) {
+      return cleaned
+        .replace(/(\d{2})(\d)/, "($1) $2")
+        .replace(/(\d{4})(\d)/, "$1-$2");
+    } else {
+      return cleaned
+        .replace(/(\d{2})(\d)/, "($1) $2")
+        .replace(/(\d{5})(\d)/, "$1-$2");
+    }
+  };
+  const formatCPF = (value) =>
+    value
+      .replace(/\D/g, "") // só dígitos
+      .replace(/(\d{3})(\d)/, "$1.$2") // 123.456
+      .replace(/(\d{3})\.(\d{3})(\d)/, "$1.$2.$3") // 123.456.789
+      .replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4") // 123.456.789-00
+      .slice(0, 14);
+
+  const formatCEP = (value = "") => {
+    return value
+      .replace(/\D/g, "") // Remove tudo que não for número
+      .slice(0, 8) // Limita a 8 dígitos
+      .replace(/^(\d{5})(\d)/, "$1-$2"); // Insere o hífen entre o 5º e 6º dígito
+  };
   const steps = () => {
     switch (step) {
       case 1:
@@ -102,90 +138,132 @@ export default function FormRegister({ navigation }) {
           <>
             <TextInput
               style={styles.input}
-              value={name}
-              onChangeText={setName}
-              placeholder="Seu nome"
+              value={formData.name}
+              onChangeText={(valor) => updateField("name", valor)}
+              placeholder="Digite seu nome"
             />
+
             <TextInput
               style={styles.input}
-              placeholder="Seu E-mail"
-              value={email}
-              onChangeText={setEmail}
+              placeholder="Digite seu CPF"
+              keyboardType="numeric"
+              value={formData.cpf}
+              onChangeText={(text) => updateField("cpf", formatCPF(text))}
             />
           </>
         );
-        case 2:
-          return(
-            <>
+      case 2:
+        return (
+          <>
+            <TextInput
+              style={styles.input}
+              placeholder="Telefone"
+              keyboardType="phone-pad"
+              value={formData.phone}
+              onChangeText={(text) => updateField("phone", formatPhone(text))}
+            />
 
-
-        </>
-      )
+            <TextInput
+              style={styles.input}
+              placeholder="CEP"
+              keyboardType="numeric"
+              value={formData.cep}
+              onChangeText={(text) => {
+                const masked = formatCEP(text);
+                updateField("cep", masked);
+              }} // já busca endereço
+            />
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <View style={{ flexDirection: "row", gap: 12 }}>
+              <TextInput
+                style={[styles.input, { width: "72%" }]}
+                placeholder="Digite sua Rua"
+                value={formData.street}
+                onChangeText={setStreet}
+                keyboardType="phone-pad"
+              />
+              <TextInput
+                placeholder="N°"
+                value={formData.number}
+                onChangeText={setNumber}
+                keyboardType="numeric"
+                style={[styles.input, { width: "25%" }]}
+              />
+            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Digite sua Rua "
+              value={phone}
+              onChangeText={(text) => setPhone(formatPhone(text))}
+              keyboardType="phone-pad"
+            />
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <TextInput
+              style={styles.input}
+              placeholder="Digite sua Rua "
+              value={phone}
+              onChangeText={(text) => setPhone(formatPhone(text))}
+              keyboardType="phone-pad"
+            />
+          </>
+        );
     }
   };
 
   // #34E167 color verder
   return (
-
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ justifyContent: "space-between", flex: 1, alignContent: "center" }}
+      behavior={Platform.OS === "ios" ? "padding" : "heigth"}
+      style={{ padding: 16, justifyContent: "flex-end", flex: 1 }}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView
-          contentContainerStyle={{ flexGrow: 1, justifyContent: "space-between", alignItems: "center" }}>
-          <View>
-            <Image
-              source={require("../images/pig.png")}
-              style={{ width: 250, height: 350, paddingTop: 50 }}
-              resizeMode="contain"
-            />
-          </View>
+        <SafeAreaView>
+          <Text style={{ marginBottom: 8 }}>Formulário Multi-Step</Text>
 
-          <View style={styles.backgroundScreenBlack}>
+          <View>{steps()}</View>
 
-            <SafeAreaView>
-              <Text>Formulário Multi-Step</Text>
-              <View>{steps()}</View>
-              <Pressable style={styles.buttonForm} onPress={Register}>
-                <Text style={{ fontSize: 18 }}>Avançar </Text>
-              </Pressable>
-
-            </SafeAreaView>
-            <View
-              style={{ flexDirection: "row", paddingBottom: 50, paddingTop: 12 }}
-            >
-              <Text
-                style={{
-                  color: "#fff",
-                  fontSize: 14,
-                  marginTop: 16,
-                  fontWeight: 400,
-                }}
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            {step > 1 && (
+              <Button
+                title="Voltar"
+                mode="contained"
+                onPress={() => setStep((s) => s - 1)}
+                style={{ backgroundColor: "#000", width: "30%", padding: 4 }}
               >
-                Já tem uma conta?
-              </Text>
-              <Text
-                style={{
-                  color: "#34E167",
-                  fontSize: 15,
-                  marginTop: 16,
-                  fontWeight: 400,
-                  textDecorationLine: "underline"
-                }}
-                onPress={() => navigation.navigate("Login")}
-              > Login
-              </Text>
-            </View>
-
-            <Image
-              source={require("../images/LogoGreen.png")}
-              style={{ width: 30, height: 30 }}
-              resizeMode="contain"
-            />
+                Voltar
+              </Button>
+            )}
+            {step < 4 && (
+              <Button
+                title="Avançar"
+                mode="contained"
+                onPress={() => setStep((s) => s + 1)}
+                style={{ backgroundColor: "#000", width: "50%", padding: 4 }}
+              >
+                Avançar
+              </Button>
+            )}
+            {step === 4 && (
+              <Button
+                title="Enviar"
+                mode="contained"
+                onPress={Register}
+                style={{ width: "50%", padding: 4 }}
+              />
+            )}
           </View>
-        </ScrollView>
+        </SafeAreaView>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView >
+    </KeyboardAvoidingView>
   );
 }

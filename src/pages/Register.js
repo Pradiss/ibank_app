@@ -127,13 +127,13 @@ export default function Register({ navigation }) {
             <View
               style={{ flexDirection: "row", gap: 16, paddingHorizontal: 6 }}
             >
-              {/* <TextInputMask
-                type={"cpf"}
+               <TextInput
+                
                 value={cpf}
                 placeholder="Digite seu cpf"
                 onChangeText={setCpf}
-                style={[styles.input, { width: "50%" }]}
-              /> */}
+                style={styles.input}
+              /> 
 
               <TextInput
                 style={[styles.input, { width: "50%" }]}

@@ -142,12 +142,12 @@ const styles = StyleSheet.create({
   //tela pos splash
 
   backgroundScreenBlack: {
+    alignItems:"center",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     backgroundColor: "#232323",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 40,
+    width:"100%",
+    padding:40,
   },
   backgroundScreen: {
     flex: 1,
