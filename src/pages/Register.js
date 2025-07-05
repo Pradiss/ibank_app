@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -14,7 +14,6 @@ import {
 } from "react-native";
 import styles from "../components/Style";
 import { apiClient } from "../Services/Api";
-import { TextInputMask } from "react-native-masked-text";
 
 export default function Register({ navigation }) {
   const [email, setEmail] = useState([]);
@@ -128,13 +127,13 @@ export default function Register({ navigation }) {
             <View
               style={{ flexDirection: "row", gap: 16, paddingHorizontal: 6 }}
             >
-              <TextInputMask
+              {/* <TextInputMask
                 type={"cpf"}
                 value={cpf}
                 placeholder="Digite seu cpf"
                 onChangeText={setCpf}
                 style={[styles.input, { width: "50%" }]}
-              />
+              /> */}
 
               <TextInput
                 style={[styles.input, { width: "50%" }]}
@@ -154,13 +153,13 @@ export default function Register({ navigation }) {
                 value={street}
                 onChangeText={setStreet}
               />
-              <TextInputMask
+              {/* <TextInputMask
                 placeholder="CEP"
                 type={"zip-code"}
                 value={cep}
                 onChangeText={setCep}
                 style={[styles.input, { width: "40%" }]}
-              />
+              /> */}
             </View>
 
             <View
@@ -172,7 +171,7 @@ export default function Register({ navigation }) {
                 value={location}
                 onChangeText={setLocation}
               />
-              <TextInputMask
+              {/* <TextInputMask
                 type={"custom"}
                 placeholder="N°"
                 options={{
@@ -182,7 +181,7 @@ export default function Register({ navigation }) {
                 onChangeText={setNumber}
                 keyboardType="numeric"
                 style={[styles.input, { width: "30%" }]}
-              />
+              /> */}
             </View>
 
             <View

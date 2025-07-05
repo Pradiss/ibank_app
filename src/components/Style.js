@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F6F6",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingTop: 50,
+   
   },
 
   ///Perfil button

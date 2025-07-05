@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react-native";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,11 @@ import {
   Pressable,
   Image,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+  ScrollView
 } from "react-native";
 import styles from "../components/Style";
 
@@ -101,59 +106,86 @@ export default function FormRegister({ navigation }) {
               onChangeText={setName}
               placeholder="Seu nome"
             />
+            <TextInput
+              style={styles.input}
+              placeholder="Seu E-mail"
+              value={email}
+              onChangeText={setEmail}
+            />
           </>
         );
+        case 2:
+          return(
+            <>
+
+
+        </>
+      )
     }
   };
 
   // #34E167 color verder
   return (
-    <View style={styles.backgroundScreen}>
-      <View>
-        <Image
-          source={require("../images/pig.png")}
-          style={{ width: 250, height: 350, paddingTop: 50 }}
-          resizeMode="contain"
-        />
-      </View>
 
-      <View style={styles.backgroundScreenBlack}>
-        <Pressable style={styles.buttonForm} onPress={Register}>
-          <Text style={{ fontSize: 18 }}>Avançar </Text>
-        </Pressable>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ justifyContent: "space-between", flex: 1, alignContent: "center" }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "space-between", alignItems: "center" }}>
+          <View>
+            <Image
+              source={require("../images/pig.png")}
+              style={{ width: 250, height: 350, paddingTop: 50 }}
+              resizeMode="contain"
+            />
+          </View>
 
-        <View
-          style={{ flexDirection: "row", paddingBottom: 50, paddingTop: 12 }}
-        >
-          <Text
-            style={{
-              color: "#fff",
-              fontSize: 14,
-              marginTop: 16,
-              fontWeight: 400,
-            }}
-          >
-            Já tem uma conta?
-          </Text>
-          <Text
-            style={{
-              color: "#34E167",
-              fontSize: 15,
-              marginTop: 16,
-              fontWeight: 400,
-            }}
-            onPress={() => navigation.navigate("Login")}
-          >
-            Login
-          </Text>
-        </View>
+          <View style={styles.backgroundScreenBlack}>
 
-        <Image
-          source={require("../images/LogoGreen.png")}
-          style={{ width: 90, height: 40 }}
-          resizeMode="contain"
-        />
-      </View>
-    </View>
+            <SafeAreaView>
+              <Text>Formulário Multi-Step</Text>
+              <View>{steps()}</View>
+              <Pressable style={styles.buttonForm} onPress={Register}>
+                <Text style={{ fontSize: 18 }}>Avançar </Text>
+              </Pressable>
+
+            </SafeAreaView>
+            <View
+              style={{ flexDirection: "row", paddingBottom: 50, paddingTop: 12 }}
+            >
+              <Text
+                style={{
+                  color: "#fff",
+                  fontSize: 14,
+                  marginTop: 16,
+                  fontWeight: 400,
+                }}
+              >
+                Já tem uma conta?
+              </Text>
+              <Text
+                style={{
+                  color: "#34E167",
+                  fontSize: 15,
+                  marginTop: 16,
+                  fontWeight: 400,
+                  textDecorationLine: "underline"
+                }}
+                onPress={() => navigation.navigate("Login")}
+              > Login
+              </Text>
+            </View>
+
+            <Image
+              source={require("../images/LogoGreen.png")}
+              style={{ width: 30, height: 30 }}
+              resizeMode="contain"
+            />
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView >
   );
 }
