@@ -25,3 +25,8 @@ export  const formatCEP = (value = "") => {
       .replace(/^(\d{5})(\d)/, "$1-$2"); // Insere o hífen entre o 5º e 6º dígito
   };
 
+export  const formatN = (value) => {
+    return value
+      .replace(/\D/g, "") // Remove tudo que não for número
+      .slice(0, 4) // Limita a 8 dígitos
+  };
