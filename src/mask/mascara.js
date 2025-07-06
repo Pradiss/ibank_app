@@ -30,3 +30,6 @@ export  const formatN = (value) => {
       .replace(/\D/g, "") // Remove tudo que não for número
       .slice(0, 4) // Limita a 8 dígitos
   };
+
+export const isEmailValid = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

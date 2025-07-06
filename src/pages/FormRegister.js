@@ -14,22 +14,11 @@ import {
 } from "react-native";
 import styles from "../components/Style";
 import { Button } from "react-native-paper";
-import { formatCEP,formatCPF,formatPhone,formatN } from "../mask/mascara";
 
+import { formatCEP, formatCPF, formatPhone, formatN,isEmailValid } from "../mask/mascara";
+import { apiClient } from "../Services/Api";
 
 export default function FormRegister({ navigation }) {
-  const [email, setEmail] = useState([]);
-  const [password, setPassword] = useState([]);
-  const [name, setName] = useState([]);
-  const [phone, setPhone] = useState([]);
-  const [cpf, setCpf] = useState([]);
-  const [street, setStreet] = useState([]);
-  const [number, setNumber] = useState([]);
-  const [location, setLocation] = useState([]);
-  const [cep, setCep] = useState([]);
-  const [city, setCity] = useState([]);
-  const [state, setState] = useState([]);
-  const [country, setCountry] = useState([]);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -72,18 +61,20 @@ export default function FormRegister({ navigation }) {
   const cepChange = async (cepValue) => {
     updateField("cep", cepValue);
 
-    if (cepValue.length === 8) {
+    const rawCep = cepValue.replace(/\D/g, ""); // remove máscara
+
+    if (rawCep.length === 8) {
       try {
         const response = await fetch(
-          `https://viacep.com.br/ws/${cepValue}/json/`
+          `https://viacep.com.br/ws/${rawCep}/json/`
         );
         const data = await response.json();
 
         if (!data.erro) {
-          updateField("street", data.street);
-          updateField("location", data.location);
-          updateField("city", data.city);
-          updateField("state", data.state);
+          updateField("street", data.logradouro);
+          updateField("location", data.bairro);
+          updateField("city", data.localidade);
+          updateField("state", data.uf);
         }
       } catch (erro) {
         console.warn("Erro ao consultar CEP:", erro);
@@ -106,7 +97,6 @@ export default function FormRegister({ navigation }) {
     console.log("Dados enviado", formData);
     Alert.alert("Formulario enviado com sucesso ");
   };
-
 
   const steps = () => {
     switch (step) {
@@ -147,7 +137,7 @@ export default function FormRegister({ navigation }) {
               value={formData.cep}
               onChangeText={(text) => {
                 const masked = formatCEP(text);
-                updateField("cep", masked);
+                cepChange(masked);
               }} // já busca endereço
             />
           </>
@@ -160,8 +150,7 @@ export default function FormRegister({ navigation }) {
                 style={[styles.input, { width: "72%" }]}
                 placeholder="Digite sua Rua"
                 value={formData.street}
-                onChangeText={(text) => updateField("street",text)}
-                
+                onChangeText={(text) => updateField("street", text)}
               />
               <TextInput
                 placeholder="N°"
@@ -175,8 +164,7 @@ export default function FormRegister({ navigation }) {
               style={styles.input}
               placeholder="Digite seu bairro"
               value={formData.location}
-              onChangeText={(text)=> updateField("location", text)}
-             
+              onChangeText={(text) => updateField("location", text)}
             />
           </>
         );
@@ -187,24 +175,55 @@ export default function FormRegister({ navigation }) {
               style={styles.input}
               placeholder="Digite sua Cidade"
               value={formData.city}
-              onChangeText={(text)=> updateField("city", text)}
+              onChangeText={(text) => updateField("city", text)}
             />
             <TextInput
               style={styles.input}
               placeholder="Seu Estado Ex: SP"
               value={formData.state}
-              onChangeText={(text)=> updateField("state", text)}
-              
+              onChangeText={(text) => updateField("state", text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="País"
+              value={formData.country}
+              onChangeText={(text) => updateField("country", text)}
             />
           </>
         );
+      case 5:
+        return (
+          <>
+            <TextInput
+              style={styles.input}
+              placeholder="Seu E-mail"
+              value={formData.email}
+              onChangeText={(text) => updateField("email", text)}
+            />
+
+            <TextInput
+              style={styles.input}
+              placeholder="Senha"
+              value={formData.password}
+              secureTextEntry
+              onChangeText={(text) => updateField("password", text)} // corrigido
+            />
+            {formData.password.length > 0 && formData.password.length < 6 && (
+              <Text style={{ color: "red", marginBottom: 8 }}>
+                A senha deve conter no mínimo 6 caracteres
+              </Text>
+            )}
+          </>
+        );
+      default:
+        return null;
     }
   };
 
   // #34E167 color verder
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "heigth"}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ padding: 16, justifyContent: "flex-end", flex: 1 }}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -218,7 +237,6 @@ export default function FormRegister({ navigation }) {
           >
             {step > 1 && (
               <Button
-                title="Voltar"
                 mode="contained"
                 onPress={() => setStep((s) => s - 1)}
                 style={{ backgroundColor: "#000", width: "30%", padding: 4 }}
@@ -226,9 +244,8 @@ export default function FormRegister({ navigation }) {
                 Voltar
               </Button>
             )}
-            {step < 4 && (
+            {step < 5 && (
               <Button
-                title="Avançar"
                 mode="contained"
                 onPress={() => setStep((s) => s + 1)}
                 style={{ backgroundColor: "#000", width: "50%", padding: 4 }}
@@ -236,13 +253,16 @@ export default function FormRegister({ navigation }) {
                 Avançar
               </Button>
             )}
-            {step === 4 && (
+            {step === 5 && (
               <Button
-                title="Enviar"
                 mode="contained"
                 onPress={Register}
-                style={{ width: "50%", padding: 4 }}
-              />
+                disabled={!isEmailValid(formData.email) ||formData.password.length < 6}
+                
+                style={{ width: "50%", padding: 4, backgroundColor: "#000" }}
+              >
+                Enviar
+              </Button>
             )}
           </View>
         </SafeAreaView>
