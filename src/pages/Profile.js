@@ -40,7 +40,7 @@ export default function Profile({ navigation }) {
             borderRadius: 100,
             alignSelf: "center",
             marginBlock: 36,
-            backgroundColor:"#fff"
+            backgroundColor: "#fff"
           }}
         />
         <Text style={{ fontSize: 38, fontWeight: 500, paddingBottom: 12 }}>
@@ -101,6 +101,7 @@ export default function Profile({ navigation }) {
               styles.buttonPerfil,
               { flexDirection: "row", justifyContent: "center", gap: 8 },
             ]}
+            onPress={() => navigation.navigate("Login")}
           >
             <MaterialIcons
               style={[styles.icon, { color: "red" }]}
@@ -109,7 +110,7 @@ export default function Profile({ navigation }) {
               color="#000"
             />
             <Text style={{ color: "red", fontSize: 18, fontWeight: 500 }}
-            onPress={() => navigation.navigate("Login")}>
+            >
               Logout
             </Text>
           </Pressable>

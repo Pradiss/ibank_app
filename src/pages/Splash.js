@@ -17,11 +17,17 @@ export default function Splash({ navigation }) {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#1FAA8E",
+        backgroundColor: "#232323",
       }}
     >
-      <Text style={styles.titleLogo}>iBank</Text>
-      <ActivityIndicator type={"large"} animating={true} color={"white"} />
+
+      <Image
+        source={require("../images/LogoGreen.png")}
+        style={{ width: 40, height: 40 }}
+        resizeMode="contain"
+      />
+      <Text style={[styles.titleLogo, { color: "white" }]}>iBank</Text>
+      <ActivityIndicator type={"large"} animating={true} color={"#34E167"} />
     </View>
   );
 }

@@ -231,19 +231,41 @@ export default function FormRegister({ navigation }) {
       case 6:
         return (
           <>
-            <Text style={{ color: "#fff", fontWeight: "bold", marginBottom: 12 }}>
-              Confirme seus dados:
-            </Text>
+            <View style={{ paddingBlock: 8, paddingBottom:12}}>
 
-            <Text style={{ color: "#fff",paddingBlock:8 }}>Nome: {formData.name}</Text>
-            <Text style={{ color: "#fff",paddingBlock:8 }}>CPF: {formData.cpf}</Text>
-            <Text style={{ color: "#fff",paddingBlock:8 }}>Telefone: {formData.phone}</Text>
-            <Text style={{ color: "#fff",paddingBlock:8 }}>CEP: {formData.cep}</Text>
-            <Text style={{ color: "#fff",paddingBlock:8 }}>Rua: {formData.street}, Nº {formData.number}</Text>
-            <Text style={{ color: "#fff",paddingBlock:8 }}>Bairro: {formData.location}</Text>
-            <Text style={{ color: "#fff",paddingBlock:8 }}>Cidade: {formData.city} - {formData.state}</Text>
-            <Text style={{ color: "#fff",paddingBlock:8 }}>País: {formData.country}</Text>
-            <Text style={{ color: "#fff",paddingBlock:8 }}>E-mail: {formData.email}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", marginBottom: 12, fontSize: 24 }}>
+                Confirme seus dados:
+              </Text>
+              <Text style={styles.textRegister}>
+                Nome: <Text style={{ color: '#34E167', fontWeight:400,  }}>{formData.name}</Text>
+              </Text>
+              <Text style={styles.textRegister}>
+                Cpf: <Text style={{ color: '#34E167', fontWeight:400,  }}>{formData.cpf}</Text>
+              </Text>
+              <Text style={styles.textRegister}>
+                Telefone: <Text style={{ color: '#34E167', fontWeight:400,  }}>{formData.phone}</Text>
+              </Text>
+              <Text style={styles.textRegister}>
+                CEP: <Text style={{ color: '#34E167', fontWeight:400,  }}>{formData.cep}</Text>
+              </Text>
+              <Text style={styles.textRegister}>
+                Rua: <Text style={{ color: '#34E167', fontWeight:400,  }}>{formData.street}, Nº {formData.number}</Text>
+              </Text>
+              <Text style={styles.textRegister}>
+                Bairro: <Text style={{ color: '#34E167', fontWeight:400,  }}>{formData.location}</Text>
+              </Text>
+              <Text style={styles.textRegister}>
+                Cidade: <Text style={{ color: '#34E167', fontWeight:400,  }}> {formData.city} - {formData.state}</Text>
+              </Text>
+              <Text style={styles.textRegister}>
+                País: <Text style={{ color: '#34E167', fontWeight:400,  }}> {formData.country}</Text>
+              </Text>
+              <Text style={styles.textRegister}>
+                E-mail: <Text style={{ color: '#34E167', fontWeight:400,  }}> {formData.email}</Text>
+              </Text>
+
+             
+            </View>
           </>
         );
       default:
@@ -261,10 +283,10 @@ export default function FormRegister({ navigation }) {
         <SafeAreaView>
           <Image
             source={require("../images/image1.png")}
-            style={{ width: 350, height: 250, marginBlock: 32, alignItems: "center" }}
+            style={{ width: 350, height: 150, marginBlock: 32 }}
             resizeMode="contain"
           />
-          <Text style={{ marginBottom: 16, color: "white" }}>Abra sua conta e envie Pix em segundos.</Text>
+          <Text style={{ marginBottom: 16, color: "white",fontSize:20 }}>Abra sua conta e envie Pix em segundos.</Text>
           <View
             style={{
               borderBottomColor: "#ccc",
@@ -328,7 +350,7 @@ export default function FormRegister({ navigation }) {
             > Login
             </Text>
           </View>
-          <View style={{ alignItems: "center", flexDirection: "row", justifyContent: "center", marginBlock: 32 }}>
+          <View style={{ alignItems: "center", flexDirection: "row", justifyContent: "center", marginBlock: 12 }}>
             <Image
               source={require("../images/LogoGreen.png")}
               style={{ width: 30, height: 30 }}

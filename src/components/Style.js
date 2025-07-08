@@ -198,6 +198,13 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 5,
   },
+  textRegister:{
+    color:"white",
+    paddingBlock:8,
+    fontSize:18,
+    fontWeight:600
+
+  }
 });
 
 export default styles;
