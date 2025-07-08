@@ -82,6 +82,7 @@ function MyTabs() {
 export default function App() {
   return (
     <PaperProvider>
+      <StatusBar  style="light" backgroundColor="#000" translucent={false}/>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Splash"

@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#fff",
     textDecorationColor: "black",
+    
   },
   buttonLogin: {
     borderRadius: 20,

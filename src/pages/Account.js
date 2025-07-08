@@ -6,7 +6,7 @@ export default function Create({ navigation }) {
     <View style={styles.backgroundScreen}>
       <View>
         <Image
-          source={require("../images/pig.png")}
+          source={require("../images/image1.png")}
           style={{ width: 250, height: 350, paddingTop: 50 }}
           resizeMode="contain"
         />

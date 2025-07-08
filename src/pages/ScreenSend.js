@@ -12,7 +12,7 @@ import styles from "../components/Style";
 export default function ScreenSend({ navigation }) {
   return (
 
-  
+
     <View style={{ paddingHorizontal: 16, alignItems: "center" }}>
       <Image
         source={require("../images/pig.png")}
@@ -29,9 +29,11 @@ export default function ScreenSend({ navigation }) {
       <TextInput
         style={[styles.input, { marginTop: 16 }]}
         placeholder="Nome, CPF/CNPJ ou chave pix"
+        placeholderTextColor="#888"
       />
 
-      <TextInput style={styles.input} placeholder="Valor R$" />
+      <TextInput style={styles.input} placeholder="Valor R$"
+        placeholderTextColor="#888" />
       <Pressable
         style={{
           borderRadius: 20,

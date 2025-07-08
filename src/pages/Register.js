@@ -107,11 +107,13 @@ export default function Register({ navigation }) {
               value={name}
               onChangeText={setName}
               placeholder="Seu nome"
+                placeholderTextColor="#888"
             />
 
             <TextInput
               style={styles.input}
               placeholder="Seu E-mail"
+                placeholderTextColor="#888"
               value={email}
               onChangeText={setEmail}
             />
@@ -119,6 +121,7 @@ export default function Register({ navigation }) {
             <TextInput
               style={styles.input}
               placeholder="Senha"
+                placeholderTextColor="#888"
               value={password}
               secureTextEntry //esconde a senha enquanto escreve
               onChangeText={setPassword}
@@ -131,6 +134,7 @@ export default function Register({ navigation }) {
                 
                 value={cpf}
                 placeholder="Digite seu cpf"
+                  placeholderTextColor="#888"
                 onChangeText={setCpf}
                 style={styles.input}
               /> 
@@ -138,6 +142,7 @@ export default function Register({ navigation }) {
               <TextInput
                 style={[styles.input, { width: "50%" }]}
                 placeholder="Telefone"
+                  placeholderTextColor="#888"
                 value={phone}
                 onChangeText={(text) => setPhone(formatPhone(text))}
                 keyboardType="phone-pad"
@@ -150,6 +155,7 @@ export default function Register({ navigation }) {
               <TextInput
                 style={[styles.input, { width: "60%" }]}
                 placeholder="Nome da Rua "
+                  placeholderTextColor="#888"
                 value={street}
                 onChangeText={setStreet}
               />
@@ -168,6 +174,7 @@ export default function Register({ navigation }) {
               <TextInput
                 style={[styles.input, { width: "70%" }]}
                 placeholder="Bairro"
+                  placeholderTextColor="#888"
                 value={location}
                 onChangeText={setLocation}
               />
@@ -190,12 +197,14 @@ export default function Register({ navigation }) {
               <TextInput
                 style={[styles.input, { width: "70%" }]}
                 placeholder="Cidade"
+                  placeholderTextColor="#888"
                 value={city}
                 onChangeText={setCity}
               />
               <TextInput
                 style={[styles.input, { width: "30%" }]}
                 placeholder="Estado "
+                  placeholderTextColor="#888"
                 value={state}
                 onChangeText={(text) =>
                   setState(text.replace(/[^a-zA-Z]/g, "").toUpperCase(0, 2))
@@ -206,6 +215,7 @@ export default function Register({ navigation }) {
             <TextInput
               style={styles.input}
               placeholder="Seu país"
+                placeholderTextColor="#888"
               value={country}
               onChangeText={setCountry}
             />

@@ -26,9 +26,17 @@ export default function EditKeyPix({ navigation }) {
                 resizeMode="contain"
                     />  */}
 
-      <TextInput style={styles.input} placeholder="Chave pix antiga" />
+      <TextInput
+        style={styles.input}
+        placeholder="Chave pix antiga"
+        placeholderTextColor="#888"
+      />
 
-      <TextInput style={styles.input} placeholder="Chave pix nova" />
+      <TextInput
+        style={styles.input}
+        placeholder="Chave pix nova"
+        placeholderTextColor="#888"
+      />
 
       <Pressable
         style={styles.buttonLogin}

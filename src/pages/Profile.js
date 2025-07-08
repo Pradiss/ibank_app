@@ -108,7 +108,8 @@ export default function Profile({ navigation }) {
               size={24}
               color="#000"
             />
-            <Text style={{ color: "red", fontSize: 18, fontWeight: 500 }}>
+            <Text style={{ color: "red", fontSize: 18, fontWeight: 500 }}
+            onPress={() => navigation.navigate("Login")}>
               Logout
             </Text>
           </Pressable>
