@@ -6,6 +6,7 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Avatar } from "react-native-paper";
 import axios from "axios";
 import { apiClient } from "../Services/Api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile({ navigation }) {
   const [users, setUsers] = useState([]);
@@ -29,6 +30,20 @@ export default function Profile({ navigation }) {
       LoadingUsers();
     }
   }, [isFocused]);
+
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem("token")
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
+
+    } catch (e) {
+      Alert.alert("Erro ao fazer logout", e.message)
+    }
+  }
 
   return (
     <ScrollView style={{ paddingBottom: 100 }}>
@@ -101,7 +116,7 @@ export default function Profile({ navigation }) {
               styles.buttonPerfil,
               { flexDirection: "row", justifyContent: "center", gap: 8 },
             ]}
-            onPress={() => navigation.navigate("Login")}
+            onPress={logout}
           >
             <MaterialIcons
               style={[styles.icon, { color: "red" }]}

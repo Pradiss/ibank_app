@@ -29,10 +29,7 @@ export default function AvatarProfile({ navigation, item }) {
             <Text
               style={{ fontSize: 18, fontWeight: "bold", marginTop: 4 }}
               onPress={() => navigation.navigate("Perfil")}
-            >
-              {" "}
-              Hi, Erick{" "}
-            </Text>
+            >Erick Prado</Text>
           </View>
         </View>
       </TouchableOpacity>

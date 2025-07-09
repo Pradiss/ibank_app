@@ -49,11 +49,8 @@ export default function FormRegister({ navigation }) {
         }
       );
       navigation.navigate("Login");
-
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "MyTabs" }],
-      });
+      
+     
     } catch (error) {
       Alert.alert("Erro ao criar um Usuario", error);
     }

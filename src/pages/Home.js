@@ -17,6 +17,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { CarouselProfile } from "../components/CarouselProfile";
 import { apiClient } from "../Services/Api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Home({ navigation }) {
   const [history, setHistory] = useState([]);
   const [users, setUsers] = useState([]);
@@ -24,9 +25,12 @@ export default function Home({ navigation }) {
 
   const LoadingUsers = async () => {
     try {
+
+      const token = await AsyncStorage.getItem('token')
       const response = await apiClient.get("/", {
         headers: {
           "id-bank": "02",
+          'Authorization':`Bearer ${token}`
         },
       });
       setUsers(response.data);
