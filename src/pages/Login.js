@@ -31,8 +31,8 @@ export default function Login({ navigation }) {
 
     try {
 
-      const res = await axios.post(
-        "https://limeiraweb.com.br/pixsenac/login",
+      const res = await apiLogin.post(
+       "/",
         { email, password },
         { headers: { 'id-bank': '02', 'Content-Type': 'application/json' } }
       )
