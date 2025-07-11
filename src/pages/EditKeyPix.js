@@ -20,11 +20,7 @@ export default function EditKeyPix({ navigation }) {
         <Text style={styles.titleLogo}>iBank</Text>
       </View>
 
-      {/* <Image
-                source={require('../images/pig.png')}
-                style={{ width: 200, height: 200, paddingBlock:32, }}
-                resizeMode="contain"
-                    />  */}
+
 
       <TextInput
         style={styles.input}

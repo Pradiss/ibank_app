@@ -4,7 +4,11 @@ import styles from "../components/Style";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
 
 export default function Splash({ navigation }) {
+
+
+
   useEffect(() => {
+
     const timer = setTimeout(() => {
       navigation.replace("Create");
     }, 2400);

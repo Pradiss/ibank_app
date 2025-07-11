@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
   cardCategory: {
     borderWidth: 1,
     borderColor: "#ccc",
-    padding: 16,
-    margin: 8,
+    width:"100%",
+    padding:16,
     borderRadius: 20,
     alignItems: "center",
     gap: 8,

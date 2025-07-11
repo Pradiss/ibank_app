@@ -39,8 +39,10 @@ export default function Login({ navigation }) {
 
       const token = res.data.token
 
+      const id = res.data.id_client
 
       await AsyncStorage.setItem("token", token)
+      await AsyncStorage.setItem("id_client", id.toString())
 
 
 

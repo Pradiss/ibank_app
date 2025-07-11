@@ -15,9 +15,12 @@ export default function Profile({ navigation }) {
 
   const LoadingUsers = async () => {
     try {
-      const res = await apiClient.get("/", {
+      const token = await AsyncStorage.getItem("token")
+      const id = await AsyncStorage.getItem("id_client")
+      const res = await apiClient.get(`/${id}`, {
         headers: {
           "id-bank": "02",
+          "Authorization" : `Bearer ${token}`
         },
       });
       setUsers(res.data);
@@ -59,14 +62,15 @@ export default function Profile({ navigation }) {
           }}
         />
         <Text style={{ fontSize: 38, fontWeight: 500, paddingBottom: 12 }}>
-          Erick Prado
+          {users.name}
         </Text>
         <Text style={{ fontSize: 20, fontWeight: 400, color: "#a0a0a0" }}>
-          erick.p436@gmail.com
+          {users.email}
         </Text>
 
         <View style={{ paddingTop: 32 }}>
           <Pressable
+          onPress={() => navigation.navigate("EditProfile")}
             style={[
               styles.buttonPerfil,
               { flexDirection: "row", justifyContent: "center", gap: 8 },

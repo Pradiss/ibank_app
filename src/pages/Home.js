@@ -57,14 +57,14 @@ export default function Home({ navigation }) {
           fontWeight: 500,
         }}
       >
-        Wallet Balance
+        Meus Saldo
       </Text>
-      <Text style={styles.price}>$ 31.298,92</Text>
+      <Text style={styles.price}>R$ 31.29,00</Text>
 
       <View style={{ marginTop: 12 }}></View>
 
-      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        <TouchableOpacity onPress={() => navigation.navigate("ScreenSend")}>
+      <View style={{ flexDirection: "row", justifyContent:"space-around" }}>
+        <TouchableOpacity onPress={() => navigation.navigate("Transferir Pix")}>
           <View style={styles.cardCategory}>
             <MaterialIcons
               style={styles.icon}
@@ -85,10 +85,10 @@ export default function Home({ navigation }) {
               size={40}
               color="#000"
             />
-            <Text style={{ fontSize: 14 }}>Ler QrCode</Text>
+            <Text style={{ fontSize: 14 }}>Ler o QrCode</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Editar Chave")}>
+        <TouchableOpacity onPress={() => navigation.navigate("KeyPix")}>
           <View style={styles.cardCategory}>
             <MaterialIcons
               style={styles.icon}
@@ -97,7 +97,7 @@ export default function Home({ navigation }) {
               color="#000"
             />
 
-            <Text style={{ fontSize: 14 }}>Editar Chave</Text>
+            <Text style={{ fontSize: 14 }}>Cadastro Pix</Text>
           </View>
         </TouchableOpacity>
       </View>

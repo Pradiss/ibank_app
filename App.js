@@ -20,6 +20,9 @@ import ScreenScan from "./src/pages/ScreenScan";
 import EditKeyPix from "./src/pages/EditKeyPix";
 import ForwardPassword from "./src/pages/ForwardPassword";
 import FormRegister from "./src/pages/FormRegister";
+import KeyPix from "./src/pages/KeyPix";
+import RegisterKey from "./src/pages/RegisterKey";
+import EditProfile from "./src/pages/EditProfile";
 
 const Stack = createNativeStackNavigator();
 
@@ -82,7 +85,7 @@ function MyTabs() {
 export default function App() {
   return (
     <PaperProvider>
-      <StatusBar  style="light" backgroundColor="#000" translucent={false}/>
+      <StatusBar  style="gray" backgroundColor="#000" translucent={false}/>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Splash"
@@ -96,7 +99,7 @@ export default function App() {
           <Stack.Screen name="Create" component={Create} />
           <Stack.Screen name="FormRegister" component={FormRegister} />
           <Stack.Screen
-            name="ScreenSend"
+            name="Transferir Pix"
             component={ScreenSend}
             options={{ headerShown: true }}
           />
@@ -111,6 +114,9 @@ export default function App() {
             options={{ headerShown: true }}
           />
           <Stack.Screen name="ForwardPassword" component={ForwardPassword} />
+          <Stack.Screen name="KeyPix" component={KeyPix} />
+          <Stack.Screen name="RegisterKey" component={RegisterKey} />
+          <Stack.Screen name="EditProfile" component={EditProfile} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

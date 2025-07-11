@@ -4,6 +4,7 @@ import styles from "../components/Style";
 import { CardHistory } from "../components/CardHistory";
 import { apiClient } from "../Services/Api";
 import { useIsFocused } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function History({ item, navigation }) {
   const [history, setHistory] = useState([]);
@@ -11,9 +12,12 @@ export default function History({ item, navigation }) {
 
   const LoadingHistory = async () => {
     try {
-      const res = await apiClient.get("/", {
+      const token = await AsyncStorage.getItem("token")
+      const id = await AsyncStorage.getItem("id_client")
+      const res = await apiClient.get(`${id}`, {
         headers: {
           "id-bank": "02",
+          "Authorization" : `Bearer ${token}`
         },
       });
       setHistory(res.data);

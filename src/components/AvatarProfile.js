@@ -1,12 +1,39 @@
 import react, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { Avatar } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "../components/Style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { apiClient } from "../Services/Api";
 
 export default function AvatarProfile({ navigation, item }) {
   const [users, setUsers] = useState("");
 
+
+
+  useEffect(() => {
+
+
+    const LoadingUsers = async () => {
+      try {
+        const id = await AsyncStorage.getItem("id_client")
+        const token = await AsyncStorage.getItem("token")
+        const res = await apiClient.get(
+          `/${id}`,
+          {
+            headers: { "id-bank": " 02", "Authorization": `Bearer${token}` }
+          })
+        setUsers(res.data)
+
+      } catch (e) {
+        Alert.alert("erro ao carregar usuario", e.message)
+      }
+    }
+
+    LoadingUsers()
+  },)
+
+  
   return (
     <View
       style={{
@@ -21,15 +48,15 @@ export default function AvatarProfile({ navigation, item }) {
           <Avatar.Image
             size={50}
             source={require("../images/avatar.png")}
-            style={{ alignSelf: "flex-start",backgroundColor:"#fff" }}
+            style={{ alignSelf: "flex-start", backgroundColor: "#fff" }}
           />
 
           <View style={{ justifyContent: "center", padding: 8 }}>
-            <Text>Welcome</Text>
+            <Text>Bem Vindo !!</Text>
             <Text
               style={{ fontSize: 18, fontWeight: "bold", marginTop: 4 }}
               onPress={() => navigation.navigate("Perfil")}
-            >Erick Prado</Text>
+            >{users.name}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -42,11 +69,7 @@ export default function AvatarProfile({ navigation, item }) {
           color="#000"
           onPress={() => navigation.navigate("Notification")}
         />
-
-        {/*             
-                <MaterialCommunityIcons style={styles.icon} name="bell" size={24} color="#000"
-                onPress={() => navigation.navigate("Notification")}
-                /> */}
+        
       </View>
     </View>
   );
