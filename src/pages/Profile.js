@@ -130,7 +130,7 @@ export default function Profile({ navigation }) {
             />
             <Text style={{ color: "red", fontSize: 18, fontWeight: 500 }}
             >
-              Logout
+              Sair
             </Text>
           </Pressable>
         </View>

@@ -16,30 +16,36 @@ import styles from "../components/Style";
 import { apiClient } from "../Services/Api";
 import { useIsFocused } from "@react-navigation/native";
 import { formatCPF, formatPhone } from "../mask/mascara";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function EditProfile({ navigation }) {
     const [users, setUsers] = useState([])
-    const [email, setEmail] = useState([]);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
    
-    const [name, setName] = useState([]);
-    const [phone, setPhone] = useState([]);
-    const [cpf, setCpf] = useState([]);
-    const [street, setStreet] = useState([]);
-    const [number, setNumber] = useState([]);
-    const [location, setLocation] = useState([]);
-    const [cep, setCep] = useState([]);
-    const [city, setCity] = useState([]);
-    const [state, setState] = useState([]);
-    const [country, setCountry] = useState([]);
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [street, setStreet] = useState("");
+    const [number, setNumber] = useState("");
+    const [location, setLocation] = useState("");
+    const [cep, setCep] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [country, setCountry] = useState("");
+
+    const isFocused = useIsFocused()
 
     const Edit = async () => {
         try {
+            const token = await AsyncStorage.getItem("token")
+            const id = await AsyncStorage.getItem("id_client")
             const response = await apiClient.put(
-                "/",
+                `/${id}`,
                 {
                     name,
                     email,
-                   
+                    password,
                     phone,
                     cpf,
                     street,
@@ -54,17 +60,15 @@ export default function EditProfile({ navigation }) {
                 {
                     headers: {
                         "id-bank": "2",
+                        "Authorization" : `Bearer ${token}`
                     },
                 }
             );
-            navigation.navigate("Login");
+            navigation.navigate("MyTabs", {screen: "Profile"});
 
-            navigation.reset({
-                index: 0,
-                routes: [{ name: "MyTabs" }],
-            });
+          
         } catch (error) {
-            Alert.alert("Erro ao criar um Usuario", error);
+            Alert.alert("Erro ao Editar Perfil", error);
         }
     };
 
@@ -78,13 +82,55 @@ export default function EditProfile({ navigation }) {
                     "Authorization": `Bearer ${token}`
                 },
             });
-            setUsers(res.data);
+            
+            setName(res.data.name)
+            setEmail(res.data.email)
+            setPassword(res.data.password)
+            setPhone(res.data.phone)
+            setCpf(res.data.cpf)
+            setStreet(res.data.street)
+            setNumber(res.data.number)
+            setLocation(res.data.location)
+            setCep(res.data.cep)
+            setCity(res.data.city)
+            setState(res.data.state)
+            setCountry(res.data.country)
         } catch (e) {
             Alert.alert("Erro ao carregar Historico", e);
         }
-        LoadingUsers();
+        
     };
 
+
+    const cepChange = async (cepValue) => {
+        setCep(cepValue); 
+      
+        const rawCep = cepValue.replace(/\D/g, "");
+      
+        if (rawCep.length === 8) {
+          try {
+            const response = await fetch(`https://viacep.com.br/ws/${rawCep}/json/`);
+            const data = await response.json();
+      
+            if (!data.erro) {
+              setStreet(data.logradouro || "");
+              setLocation(data.bairro || "");
+              setCity(data.localidade || "");
+              setState(data.uf || "");
+            }
+          } catch (erro) {
+            console.warn("Erro ao consultar CEP:", erro);
+          }
+        }
+      };
+      
+
+    useEffect(() => {
+        if(isFocused){
+            LoadingUsers()
+        }
+
+    },[isFocused])
 
 
     return (
@@ -118,14 +164,14 @@ export default function EditProfile({ navigation }) {
                             onChangeText={setEmail}
                         />
 
-                        {/* <TextInput
+                        <TextInput
                             style={styles.input}
-                            placeholder="Senha"
+                            placeholder="Sua Senha"
                             placeholderTextColor="#888"
                             value={password}
-                            secureTextEntry //esconde a senha enquanto escreve
                             onChangeText={setPassword}
-                        /> */}
+                        />
+
 
                         <View
                             style={{ flexDirection: "row", gap: 16, paddingHorizontal: 6 }}
@@ -135,7 +181,7 @@ export default function EditProfile({ navigation }) {
                                 value={cpf}
                                 placeholder="Digite seu cpf"
                                 placeholderTextColor="#888"
-                                onChangeText={formatCPF(setCpf)}
+                                onChangeText={(text) => setCpf(formatCPF(text))}
                                 style={[styles.input, { width: "50%" }]}
                             />
 
@@ -161,9 +207,11 @@ export default function EditProfile({ navigation }) {
                             />
                             <TextInput
                                 placeholder="CEP"
-
                                 value={cep}
-                                onChangeText={setCep}
+                                onChangeText={(text) => {
+                                    setCep(text)
+                                    cepChange(text)
+                                  }}
                                 style={[styles.input, { width: "40%" }]}
                             />
                         </View>
@@ -203,7 +251,7 @@ export default function EditProfile({ navigation }) {
                                 placeholderTextColor="#888"
                                 value={state}
                                 onChangeText={(text) =>
-                                    setState(text.replace(/[^a-zA-Z]/g, "").toUpperCase(0, 2))
+                                    setState(text.replace(/[^a-zA-Z]/g, "").toUpperCase().slice(0, 2))
                                 }
                             />
                         </View>

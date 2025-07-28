@@ -26,8 +26,9 @@ export default function Home({ navigation }) {
   const LoadingUsers = async () => {
     try {
 
-      const token = await AsyncStorage.getItem('token')
-      const response = await apiClient.get("/", {
+      const token = await AsyncStorage.getItem('token');
+      const id = await AsyncStorage.getItem("id_client")
+      const response = await apiClient.get(`/${id}`, {
         headers: {
           "id-bank": "02",
           'Authorization':`Bearer ${token}`
@@ -153,7 +154,7 @@ export default function Home({ navigation }) {
         </Text>
       </View>
       <FlatList
-        data={users.slice(0, 4)}
+        data={users}
         keyExtractor={(item) => item.id_client.toString()}
         renderItem={({ item }) => (
           <CardHistory item={item} navigation={navigation} />

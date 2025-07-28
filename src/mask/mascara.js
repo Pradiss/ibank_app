@@ -1,4 +1,5 @@
 export const formatPhone = (value) => {
+  const str = String(value || ""); 
   const cleaned = value.replace(/\D/g, "").slice(0, 11);
   if (cleaned.length <= 10) {
     return cleaned
@@ -9,7 +10,8 @@ export const formatPhone = (value) => {
       .replace(/(\d{2})(\d)/, "($1) $2")
       .replace(/(\d{5})(\d)/, "$1-$2");
   }
-};
+}
+
 export const formatCPF = (value) =>
   value
     .replace(/\D/g, "") // só dígitos

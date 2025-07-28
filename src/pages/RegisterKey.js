@@ -2,6 +2,9 @@ import { View, Text, Pressable, Image, TextInput } from "react-native";
 import styles from "../components/Style";
 
 export default function RegisterKey({ navigation }) {
+
+    const [key, setKey] = useState([])
+
     return (
         <View style={styles.container}>
             <View

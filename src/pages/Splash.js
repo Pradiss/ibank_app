@@ -1,20 +1,18 @@
-import react, { useState, useEffect } from "react";
-import { View, Text, Image } from "react-native";
-import styles from "../components/Style";
-import { ActivityIndicator, MD2Colors } from "react-native-paper";
+import react, { useState, useEffect } from "react"
+import { View, Text, Image } from "react-native"
+import styles from "../components/Style"
+import { ActivityIndicator} from "react-native-paper"
 
 export default function Splash({ navigation }) {
-
-
 
   useEffect(() => {
 
     const timer = setTimeout(() => {
-      navigation.replace("Create");
-    }, 2400);
+      navigation.replace("Create")
+    }, 2400)
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => clearTimeout(timer)
+  }, [])
   return (
     <View
       style={{
@@ -31,7 +29,7 @@ export default function Splash({ navigation }) {
         resizeMode="contain"
       />
       <Text style={[styles.titleLogo, { color: "white" }]}>iBank</Text>
-      <ActivityIndicator type={"large"} animating={true} color={"#34E167"} />
+      <ActivityIndicator type={"large"} animating={true} color={"#34E167"}/>
     </View>
   );
 }
