@@ -6,32 +6,34 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 
 export default function KeySave({ navigation }) {
-  const [key, setKey] = useState([]);
-  const isFocused = useIsFocused();
+  const [key, setKey] = useState("")
+  const isFocused = useIsFocused()
 
   const LoadingKey = async () => {
     try {
+      const id_client = await AsyncStorage.getItem("id_client")
       const token = await AsyncStorage.getItem("token");
-      const res = await apiRegisterKey.get(`/`,
+      const id_key = await AsyncStorage.getItem("id_chave")
+      const res = await apiRegisterKey.get(`/${id_key}`,
         {
         headers: {
           "id-bank": "02",
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
-      });
+      })
 
-      setKey(Array.isArray(res.data) ? res.data : []);
+      setKey(res.data);
      
     } catch (e) {
-      Alert.alert("Erro ao Carregar Chave pix", e.message);
+      Alert.alert("Erro ao Carregar Chave pix", e.message)
     }
-  };
+  }
 
   useEffect(() => {
     if (isFocused) {
-      LoadingKey();
+      LoadingKey()
     }
-  }, [isFocused]);
+  }, [isFocused])
 
   return (
     <View style={styles.container}>
@@ -56,7 +58,7 @@ export default function KeySave({ navigation }) {
         keyExtractor={(item) => item.id_chave.toString()}
         renderItem={({ item }) => (
           <View style={{ marginBottom: 10 }}>
-            <Text>Chave: {item.name}</Text>
+            <Text> {item.name}</Text>
             <Text> {item.id_client}</Text>
           </View>
         )}

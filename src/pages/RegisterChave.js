@@ -4,7 +4,7 @@ import styles from "../components/Style";
 import { apiRegisterKey } from "../Services/Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function RegisterKey({ navigation }) {
+export default function RegisterChave({ navigation }) {
   
     const [name, setName] = useState([])
     
@@ -32,6 +32,12 @@ export default function RegisterKey({ navigation }) {
             Alert.alert("ERRO ao Cadastrar a chave pix", e.message)
         }
     }
+
+    // const LoadingUsers = async () => {
+    //     try{
+    //         const 
+    //     }
+    // }
 
     return (
         <View style={styles.container}>

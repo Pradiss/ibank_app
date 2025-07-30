@@ -2,10 +2,21 @@ import react, { useState, useEffect } from "react"
 import { View, Text, Image } from "react-native"
 import styles from "../components/Style"
 import { ActivityIndicator} from "react-native-paper"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Splash({ navigation }) {
 
   useEffect(() => {
+   const checkLogin = async () => {
+    const token = await AsyncStorage.getItem('token');
+    if (token) {
+      navigation.replace('MyTabs');
+    } else {
+      navigation.replace('Login');
+    }
+  };
+
+  checkLogin();
 
     const timer = setTimeout(() => {
       navigation.replace("Create")

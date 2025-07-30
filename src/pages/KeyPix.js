@@ -40,7 +40,7 @@ export default function KeyPix({ navigation }) {
             </Pressable>
 
             <Pressable
-                onPress={() => navigation.navigate("RegisterKey")}
+                onPress={() => navigation.navigate("Cadastrar Chave")}
                 style={[
                     styles.buttonPerfil,
                     { flexDirection: "row", justifyContent: "center", gap: 8 },
@@ -53,6 +53,22 @@ export default function KeyPix({ navigation }) {
                     color="#000"
                 />
                 <Text style={styles.textButtonPerfil}>Cadastrar Chave</Text>
+            </Pressable>
+
+            <Pressable
+                onPress={() => navigation.navigate("RegisterKey")}
+                style={[
+                    styles.buttonPerfil,
+                    { flexDirection: "row", justifyContent: "center", gap: 8 },
+                ]}
+            >
+                <MaterialIcons
+                    style={styles.icon}
+                    name="key"
+                    size={24}
+                    color="#000"
+                />
+                <Text style={styles.textButtonPerfil}>Cadastrar Chave Aleatória</Text>
             </Pressable>
 
             <Pressable

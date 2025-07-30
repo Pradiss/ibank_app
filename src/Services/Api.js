@@ -11,3 +11,7 @@ export const apiLogin = axios.create({
 export const apiRegisterKey = axios.create({
   baseURL: "https://limeiraweb.com.br/pixsenac/chave",
 })
+
+export const apiTransacao = axios.create({
+  baseURL: "https://limeiraweb.com.br/pixsenac/transacao",
+})

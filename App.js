@@ -24,6 +24,7 @@ import KeyPix from "./src/pages/KeyPix";
 import RegisterKey from "./src/pages/RegisterKey";
 import EditProfile from "./src/pages/EditProfile";
 import KeySave from "./src/pages/KeySave";
+import RegisterChave from "./src/pages/RegisterChave";
 
 const Stack = createNativeStackNavigator();
 
@@ -118,6 +119,7 @@ export default function App() {
           <Stack.Screen name="KeyPix" component={KeyPix} />
           <Stack.Screen name="Chaves Pix" component={KeySave}   
           options={{ headerShown: true }}/>
+          <Stack.Screen name="Cadastrar Chave" component={RegisterChave} />
           <Stack.Screen name="RegisterKey" component={RegisterKey} />
           <Stack.Screen name="EditProfile" component={EditProfile}  />
         </Stack.Navigator>
