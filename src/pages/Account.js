@@ -7,7 +7,7 @@ export default function Create({ navigation }) {
       <View>
         <Image
           source={require("../images/image1.png")}
-          style={{ width: 250, height: 350, paddingTop: 50 }}
+          style={{ width: 400, height: 400, paddingTop: 130 }}
           resizeMode="contain"
         />
       </View>

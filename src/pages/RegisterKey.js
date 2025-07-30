@@ -1,9 +1,36 @@
-import { View, Text, Pressable, Image, TextInput } from "react-native";
+import react, {useState,useEffect} from "react"
+import { View, Text, Pressable, Image, TextInput, Alert } from "react-native";
 import styles from "../components/Style";
+import { apiRegisterKey } from "../Services/Api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RegisterKey({ navigation }) {
+  
+    const [name, setName] = useState([])
+    
+    const registerkey = async() =>{
 
-    const [key, setKey] = useState([])
+        try{
+            const id_client = await AsyncStorage.getItem("id_client")
+            const token = await AsyncStorage.getItem("token")
+            const res = await apiRegisterKey.post(`/`,
+                {
+                    id_client,
+                    name
+                },
+                {
+                    headers:{
+
+                        'id-bank' :'02',
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            )
+            navigation.navigate("MyTabs")
+        }catch(e){
+            Alert.alert("ERRO ao Cadastrar a chave pix", e.message)
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -29,20 +56,17 @@ export default function RegisterKey({ navigation }) {
             
             <TextInput
                 style={[styles.input, { marginTop: 16 }]}
-                placeholder="Nome, CPF/CNPJ ou chave pix"
+                placeholder="Email, CPF/CNPJ ou chave aleatória"
                 placeholderTextColor="#888"
+                value={name}
+                onChangeText={setName}
             />
-            <TextInput
-                style={styles.input}
-                placeholder="Chave pix"
-                placeholderTextColor="#888"
-            />
-
+            
             <Pressable
                 style={styles.buttonLogin}
-                onPress={() => navigation.navigate("MyTabs")}
+                onPress={registerkey}
             >
-                <Text style={{ fontSize: 18, color: "#fff" }}> Editar chave</Text>
+                <Text style={{ fontSize: 18, color: "#fff" }}>Cadastrar Chave PIX</Text>
             </Pressable>
         </View>
     );

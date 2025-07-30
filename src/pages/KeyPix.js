@@ -56,7 +56,7 @@ export default function KeyPix({ navigation }) {
             </Pressable>
 
             <Pressable
-                onPress={() => navigation.navigate("KeySave")}
+                onPress={() => navigation.navigate("Chaves Pix")}
                 style={[
                     styles.buttonPerfil,
                     { flexDirection: "row", justifyContent: "center", gap: 8 },
