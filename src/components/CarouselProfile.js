@@ -12,7 +12,7 @@ export function CarouselProfile({ item, navigation }) {
           source={require("../images/avatar.png")}
           style={{ alignSelf: "flex-start",backgroundColor:"#232323" }}
         />
-        <Text style={{ fontSize: 14, fontWeight: 600 }}>{item.name?.trim().split(/\s+/)[0]}</Text>
+        <Text style={{ fontSize: 14, fontWeight: 600 }}>{item.recebedor_name?.trim().split(/\s+/)[0]}</Text>
       </View>
     </TouchableOpacity>
   );

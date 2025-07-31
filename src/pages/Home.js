@@ -147,8 +147,8 @@ export default function Home({ navigation }) {
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          data={users}
-          keyExtractor={(item) => item.id_client.toString()}
+          data={transacao}
+          keyExtractor={(item) => item.id_transacao.toString()}
           renderItem={({ item }) => (
             <CarouselProfile item={item} navigation={navigation} />
           )}
