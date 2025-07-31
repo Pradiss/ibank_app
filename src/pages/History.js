@@ -2,7 +2,7 @@ import react, { useEffect, useState } from "react";
 import { View, Text, TextInput, FlatList, Alert } from "react-native";
 import styles from "../components/Style";
 import { CardHistory } from "../components/CardHistory";
-import { apiClient } from "../Services/Api";
+import { apiTransacao } from "../Services/Api";
 import { useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -14,7 +14,7 @@ export default function History({ item, navigation }) {
     try {
       const token = await AsyncStorage.getItem("token")
       const id = await AsyncStorage.getItem("id_client")
-      const res = await apiClient.get(`${id}`, {
+      const res = await apiTransacao.get(`${id}`, {
         headers: {
           "id-bank": "02",
           "Authorization" : `Bearer ${token}`
@@ -53,7 +53,7 @@ export default function History({ item, navigation }) {
 
       <FlatList
         data={history}
-        keyExtractor={(item) => item.id_client.toString()}
+        keyExtractor={(item) => item.id_transacao.toString()}
         renderItem={({ item }) => (
           <CardHistory item={item} navigation={navigation} />
         )}

@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import react, { use, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -16,11 +16,15 @@ import { Cards } from "../components/Cards";
 import { useIsFocused } from "@react-navigation/native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { CarouselProfile } from "../components/CarouselProfile";
+import { apiTransacao } from "../Services/Api";
 import { apiClient } from "../Services/Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 export default function Home({ navigation }) {
   const [history, setHistory] = useState([]);
   const [users, setUsers] = useState([]);
+  const [transacao, setTransacao] = useState([]);
   const isFocused = useIsFocused();
 
   const LoadingUsers = async () => {
@@ -40,9 +44,26 @@ export default function Home({ navigation }) {
     }
   };
 
+   const LoadingHistory = async () => {
+    try {
+      const token = await AsyncStorage.getItem("token")
+      const id = await AsyncStorage.getItem("id_client")
+      const res = await apiTransacao.get(`${id}`, {
+        headers: {
+          "id-bank": "02",
+          "Authorization" : `Bearer ${token}`
+        },
+      });
+      setTransacao(res.data);
+    } catch (e) {
+      Alert.alert("Erro ao carregar Historico", e.message);
+    }
+  };
+
   useEffect(() => {
     if (isFocused) {
       LoadingUsers();
+      LoadingHistory();
     }
   }, [isFocused]);
 
@@ -154,8 +175,8 @@ export default function Home({ navigation }) {
         </Text>
       </View>
       <FlatList
-        data={users}
-        keyExtractor={(item) => item.id_client.toString()}
+        data={transacao}
+        keyExtractor={(item) => item.id_transacao.toString()}
         renderItem={({ item }) => (
           <CardHistory item={item} navigation={navigation} />
         )}

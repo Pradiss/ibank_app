@@ -11,8 +11,6 @@ export default function EditKeyPix({ navigation }) {
   const [keyNova, setKeyNova] = useState("")
   const isFocused = useIsFocused()
 
-
- 
   return (
     <View style={styles.container}>
       <View
@@ -30,8 +28,6 @@ export default function EditKeyPix({ navigation }) {
         />
         <Text style={styles.titleLogo}>iBank</Text>
       </View>
-
-
 
       <TextInput
         style={styles.input}

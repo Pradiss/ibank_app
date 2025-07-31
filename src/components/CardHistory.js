@@ -15,17 +15,22 @@ export function CardHistory({ item, navigation }) {
         <Avatar.Image
           size={50}
           source={require("../images/avatar.png")}
-          style={{ alignSelf: "flex-start",backgroundColor:"#232323" }}
+          style={{ alignSelf: "flex-start", backgroundColor: "#232323" }}
         />
 
-        <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 16, marginBottom: 4, fontWeight: 600 }}>
-            {item.name}
+        <View style={{ flex: 1, gap: 4 }}>
+          <Text style={{ fontSize: 19, marginBottom: 4, fontWeight: 600 }}>
+            Pix enviado
           </Text>
-          <Text style={{ fontSize: 14, color: "#a1a1a1" }}>{item.email}</Text>
+          <Text style={{ fontSize: 16, color: "#555" }}>
+            {item.recebedor_name}
+          </Text>
         </View>
 
-        <Text style={{ color: "red", fontSize: 16 }}>-$</Text>
+        <View style={{flex:1, alignItems: "flex-end"  ,gap:8}}>
+          <Text style={{ color: "red", fontSize: 16 }}>-${item.valor}</Text>
+          <Text style={{ color: "#555", fontSize: 14 }}>{item.data_hora}</Text>
+        </View>
       </View>
 
       <View
@@ -35,6 +40,8 @@ export function CardHistory({ item, navigation }) {
           marginVertical: 10,
         }}
       />
+      
+
     </TouchableOpacity>
   );
 }
