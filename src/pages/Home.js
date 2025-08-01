@@ -81,7 +81,7 @@ export default function Home({ navigation }) {
       >
         Meus Saldo
       </Text>
-      <Text style={styles.price}>R$ 31.29,00</Text>
+      <Text style={styles.price}>R${users.saldo}</Text>
 
       <View style={{ marginTop: 12 }}></View>
 
@@ -170,7 +170,6 @@ export default function Home({ navigation }) {
           style={{ fontSize: 13 }}
           onPress={() => navigation.navigate("Extrato")}
         >
-          {" "}
           Ver todos
         </Text>
       </View>

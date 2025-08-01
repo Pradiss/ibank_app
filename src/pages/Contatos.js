@@ -13,7 +13,8 @@ import { useIsFocused } from "@react-navigation/native";
 import styles from "../components/Style";
 import { CardContacts } from "../components/CardContacts";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { apiClient } from "../Services/Api";
+import { apiClient, apiTransacao } from "../Services/Api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function Contacts({ navigation }) {
   const [search, setSearch] = useState("");
@@ -22,9 +23,12 @@ export function Contacts({ navigation }) {
 
   const LoadingHistory = async () => {
     try {
-      const res = await apiClient.get("/", {
+      const token = await AsyncStorage.getItem("token")
+      const id_client = await AsyncStorage.getItem("id_client")
+      const res = await apiClient.get(`/${id_client}`, {
         headers: {
           "id-bank": "02",
+          'Authorization' : `Bearer/${token}`
         },
       });
       setHistory(res.data);

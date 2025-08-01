@@ -77,8 +77,6 @@ export default function ScreenSend({ navigation }) {
   }, [isFocused])
 
   return (
-
-
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{ paddingHorizontal: 16, alignItems: "center", marginTop: 16 }}>
         <Image

@@ -15,7 +15,6 @@ export default function Result() {
       const token = await AsyncStorage.getItem("token")
       const res = await apiTransacao.get(
         `/${id_client}`,
-
         {
           headers: {
             "id-bank": "02",
@@ -35,15 +34,16 @@ export default function Result() {
     }
   }, [isFocused])
 
-  const ultimoPix =
-    transacao.length > 0 ? transacao[transacao.length - 1] : null
+  const ultimoPix = transacao.length > 0 ? transacao[transacao.length - 1] : null
 
   return (
-    <View>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
       {ultimoPix ? (
         <View style={{ marginBottom: 10 }}>
-          <Text>Valor: {ultimoPix.valor}</Text>
-          <Text>Status: {ultimoPix.status}</Text>
+          <View>
+            <Text>Valor: {ultimoPix.valor}</Text>
+            <Text style={{fontSize:32}}>R${ultimoPix.valor}</Text>
+          </View>
           <Text>Pagador: {ultimoPix.pagador_name}</Text>
           <Text>Recebedor: {ultimoPix.recebedor_name}</Text>
           <Text>Banco Pagador: {ultimoPix.banco_pagador}</Text>

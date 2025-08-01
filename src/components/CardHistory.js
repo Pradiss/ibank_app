@@ -23,12 +23,12 @@ export function CardHistory({ item, navigation }) {
             Pix enviado
           </Text>
           <Text style={{ fontSize: 16, color: "#555" }}>
-            {item.recebedor_name}
+            {item.pagador_name}
           </Text>
         </View>
 
         <View style={{flex:1, alignItems: "flex-end"  ,gap:8}}>
-          <Text style={{ color: "red", fontSize: 16 }}>-${item.valor}</Text>
+          <Text style={{ color: "#000", fontSize: 16 }}>R${item.valor}</Text>
           <Text style={{ color: "#555", fontSize: 14 }}>{item.data_hora}</Text>
         </View>
       </View>
