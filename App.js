@@ -103,7 +103,7 @@ export default function App() {
           <Stack.Screen
             name="Transferir Pix"
             component={ScreenSend}
-            options={{ headerShown: true }}
+           
           />
           <Stack.Screen
             name="Scan"

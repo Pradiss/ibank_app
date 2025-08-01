@@ -80,7 +80,7 @@ export default function History({ item, navigation }) {
         <View style={{ borderBottomColor: "#ccc", borderBottomWidth: 1 }} />
 
         <FlatList
-          data={filterExtract.reverse()}
+          data={filterExtract.reverse().slice(0, 7)}
           keyExtractor={(item) => item.id_transacao.toString()}
           renderItem={({ item }) => (
             <CardHistory item={item} navigation={navigation} />

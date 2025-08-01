@@ -8,6 +8,9 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import styles from "../components/Style";
@@ -43,6 +46,7 @@ export function Contacts({ navigation }) {
   }, [isFocused]);
 
   return (
+    <Pressable onPress={Keyboard.dismiss}>
     <View style={{ padding: 16 }}>
       <TextInput
         style={styles.input}
@@ -93,5 +97,6 @@ export function Contacts({ navigation }) {
         )}
       />
     </View>
+    </Pressable>
   );
 }

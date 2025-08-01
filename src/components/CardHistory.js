@@ -23,7 +23,7 @@ export function CardHistory({ item, navigation }) {
             Pix enviado
           </Text>
           <Text style={{ fontSize: 16, color: "#555" }}>
-            {item.pagador_name}
+            {item.recebedor_name}
           </Text>
         </View>
 
@@ -40,8 +40,7 @@ export function CardHistory({ item, navigation }) {
           marginVertical: 10,
         }}
       />
-      
-
+    
     </TouchableOpacity>
   );
 }

@@ -1,55 +1,52 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   TextInput,
-  Pressable,
   FlatList,
   Image,
   Alert,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
 } from "react-native";
 import styles from "../components/Style";
 import { apiClient, apiTransacao } from "../Services/Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 import { CardContacts } from "../components/CardContacts";
-
-
+import { Button } from "react-native-paper";
 
 export default function ScreenSend({ navigation }) {
+  const [chave_pix, setChavePix] = useState("");
+  const [users, setUsers] = useState([]);
+  const [valor, setValor] = useState("");
+  const [step, setStep] = useState(1);
 
-  const [chave_pix, setChavePix] = useState([])
-  const [users, setUsers] = useState([])
-  const [valor, setValor] = useState([])
-  const isFocused = useIsFocused()
+  const isFocused = useIsFocused();
 
   const LoadingUsers = async () => {
     try {
-      const id_client = await AsyncStorage.getItem("id_client")
-      const token = await AsyncStorage.getItem("token")
-      const res = await apiClient.get(`/`,
-
-
-        {
-          headers: {
-            'id-bank': '02',
-            'Authorization': `Bearer ${token}`
-          }
-        })
-      setUsers(res.data)
+      const id_client = await AsyncStorage.getItem("id_client");
+      const token = await AsyncStorage.getItem("token");
+      const res = await apiClient.get(`/${id_client}`, {
+        headers: {
+          "id-bank": "02",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUsers(res.data);
     } catch (e) {
-      Alert.alert("Erro ao carregar usuario", e.message)
+      Alert.alert("Erro ao carregar usuários", e.message);
     }
-  }
-
+  };
 
   const sendPix = async () => {
     try {
-      const token = await AsyncStorage.getItem("token")
-      const pagador = await AsyncStorage.getItem("id_client")
-      const res = await apiTransacao.post("/",
+      const token = await AsyncStorage.getItem("token");
+      const pagador = await AsyncStorage.getItem("id_client");
+
+      await apiTransacao.post(
+        "/",
         {
           valor,
           pagador,
@@ -57,80 +54,164 @@ export default function ScreenSend({ navigation }) {
         },
         {
           headers: {
-            'id-bank': '02',
-            'Authorization': `Bearer ${token}`
-          }
-        })
+            "id-bank": "02",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      navigation.navigate("Resultado")
+      navigation.navigate("Resultado");
     } catch (e) {
-      Alert.alert("erro ao enviar pix", e.message)
+      Alert.alert("Erro ao enviar Pix", e.message);
     }
-  }
+  };
 
   useEffect(() => {
-
     if (isFocused) {
-
-      LoadingUsers()
+      LoadingUsers();
     }
-  }, [isFocused])
+  }, [isFocused]);
+
+  const steps = () => {
+    switch (step) {
+      case 1:
+        return (
+          <>
+            <Text style={[styles.titleHome, {color:"#fff"}]}>Qual valor você quer transferir?</Text>
+            <Text style={{ paddingTop: 8,  fontSize:16,paddingBottom:16,color:"#fff"}}>
+              Saldo da conta R$ <Text style={{color:"#34E167"}}>{users.saldo}</Text>
+            </Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Valor R$"
+              keyboardType="numeric"
+              placeholderTextColor="#888"
+              value={valor}
+              onChangeText={setValor}
+            />
+          </>
+        );
+
+      case 2:
+        return (
+          <>
+            <Text style={{fontSize:26, fontWeight: "500",color:"#fff"}}>
+              Para quem você quer transferir o Pix? R$
+              <Text style={{fontSize:26, fontWeight: "400", color:"#34E167"}}> {valor}</Text>
+            </Text>
+            <Text style={{ paddingVertical: 8, fontSize:16,color:"#fff"}}>
+              Encontre um contato na sua lista ou inicie uma nova transferência
+            </Text>
+            <TextInput
+              style={[styles.input, { marginTop: 16 }]}
+              placeholder="Nome, CPF/CNPJ ou chave Pix"
+              placeholderTextColor="#888"
+              value={chave_pix}
+              onChangeText={setChavePix}
+            />
+            <FlatList
+              data={users}
+              keyExtractor={(item) => item.id_client.toString()}
+              renderItem={({ item }) => (
+                <CardContacts
+                  data={item}
+                  onPress={() => setChavePix(item.chave_pix)}
+                />
+              )}
+            />
+          </>
+        );
+
+      case 3:
+        return (
+          <View style={{ paddingVertical: 8, paddingBottom: 12 }}>
+            <Text
+              style={{
+                color: "#fff",
+                fontWeight: "bold",
+                marginBottom: 12,
+                fontSize: 24,
+              }}
+            >
+              Transferindo
+            </Text>
+            <Text style={{
+                color: "#fff",
+                fontWeight: "bold",
+                marginBottom: 12,
+                fontSize: 36,
+              }}>R$ {valor}</Text>
+            <Text style={{
+                color: "#fff",
+                fontWeight: "bold",
+                marginBottom: 12,
+                fontSize: 16,
+                justifyContent:"space-between",
+              }}>
+              CPF/Chave Pix:{" "}
+              <Text style={{ color: "#34E167", fontWeight: "400" }}>
+                {chave_pix}
+              </Text>
+            </Text>
+          </View>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ paddingHorizontal: 16, alignItems: "center", marginTop: 16 }}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+      <View style={{ flex:1 , paddingHorizontal:16, backgroundColor:"#232323", paddingTop:56}}>
         <Image
           source={require("../images/pig.png")}
-          style={{ width: 200, height: 200, paddingBlock: 32 }}
+          style={{ width: 200, height: 200,paddingBottom:32 }}
           resizeMode="contain"
         />
 
-        <Text style={styles.titleHome}>
-          Para quem você quer transferir o pix?
-        </Text>
-        <Text style={{ paddingBlock: 8, paddingHorizontal: 16 }}>
-          Encontre um contato na sua lista ou inicie uma nova transferencia
-        </Text>
-        <TextInput
-          style={[styles.input, { marginTop: 16 }]}
-          placeholder="Nome, CPF/CNPJ ou chave pix"
-          placeholderTextColor="#888"
-          value={chave_pix}
-          onChangeText={setChavePix}
+        <View style={{ width: "100%" }}>{steps()}</View>
 
-        />
-
-        <TextInput style={styles.input}
-          placeholder="Valor R$"
-          keyboardType="numeric"
-          placeholderTextColor="#888"
-          value={valor}
-          onChangeText={setValor}
-        />
-        <Pressable
-          style={{
-            borderRadius: 20,
-            width: "100%",
-            height: 55,
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 32,
-            backgroundColor: "black",
-            padding: 8,
-            color: "white",
-          }}
-          onPress={sendPix}
+        <View
+          style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 20 }}
         >
-          <Text style={{ fontSize: 18, color: "#fff" }}>Enviar Pix </Text>
-        </Pressable>
-        {/* <FlatList
-        data={users}
-        keyExtractor={(item) => item.id_client.toString()}
-        renderItem={({ item }) => (
-          <CardContacts item={item} navigation={navigation} />
+          {step > 1 && (
+            <Button
+              mode="contained"
+              onPress={() => setStep((s) => s - 1)}
+              style={{
+                backgroundColor: "transparent",
+                width: "30%",
+                padding: 4,
+              }}
+              labelStyle={{ color: "#000", textDecorationLine: "underline" }}
+            >
+              Voltar
+            </Button>
           )}
-          /> */}
-
+          {step < 3 && (
+            <Button
+              mode="contained"
+              onPress={() => setStep((s) => s + 1)}
+              style={{ backgroundColor: "#34E167", width: "50%", padding: 4 }}
+              labelStyle={{ color: "#000" }}
+              disabled={!valor || (step === 2 && !chave_pix)}
+            >
+              Avançar
+            </Button>
+          )}
+          {step === 3 && (
+            <Button
+              mode="contained"
+              onPress={sendPix}
+              disabled={!chave_pix || !valor}
+              style={{ width: "50%", padding: 4, backgroundColor: "#34E167" }}
+              labelStyle={{ color: "#000" }}
+            >
+              Enviar
+            </Button>
+          )}
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
