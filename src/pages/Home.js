@@ -99,7 +99,7 @@ export default function Home({ navigation }) {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Scan")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Resultado")}>
           <View style={styles.cardCategory}>
             <MaterialCommunityIcons
               style={styles.icon}

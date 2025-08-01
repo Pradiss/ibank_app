@@ -77,9 +77,19 @@ export default function ScreenSend({ navigation }) {
       case 1:
         return (
           <>
-            <Text style={[styles.titleHome, {color:"#fff"}]}>Qual valor você quer transferir?</Text>
-            <Text style={{ paddingTop: 8,  fontSize:16,paddingBottom:16,color:"#fff"}}>
-              Saldo da conta R$ <Text style={{color:"#34E167"}}>{users.saldo}</Text>
+            <Text style={[styles.titleHome, { color: "#fff" }]}>
+              Qual valor você quer transferir?
+            </Text>
+            <Text
+              style={{
+                paddingTop: 8,
+                fontSize: 16,
+                paddingBottom: 16,
+                color: "#fff",
+              }}
+            >
+              Saldo da conta R${" "}
+              <Text style={{ color: "#34E167" }}>{users.saldo}</Text>
             </Text>
             <TextInput
               style={styles.input}
@@ -95,11 +105,16 @@ export default function ScreenSend({ navigation }) {
       case 2:
         return (
           <>
-            <Text style={{fontSize:26, fontWeight: "500",color:"#fff"}}>
+            <Text style={{ fontSize: 26, fontWeight: "500", color: "#fff" }}>
               Para quem você quer transferir o Pix? R$
-              <Text style={{fontSize:26, fontWeight: "400", color:"#34E167"}}> {valor}</Text>
+              <Text
+                style={{ fontSize: 26, fontWeight: "400", color: "#34E167" }}
+              >
+                {" "}
+                {valor}
+              </Text>
             </Text>
-            <Text style={{ paddingVertical: 8, fontSize:16,color:"#fff"}}>
+            <Text style={{ paddingVertical: 8, fontSize: 16, color: "#fff" }}>
               Encontre um contato na sua lista ou inicie uma nova transferência
             </Text>
             <TextInput
@@ -111,12 +126,17 @@ export default function ScreenSend({ navigation }) {
             />
             <FlatList
               data={users}
-              keyExtractor={(item) => item.id_client.toString()}
+              keyExtractor={(item, index) => item.id_client?.toString() || index.toString()}
+              style={{ flexGrow: 0, maxHeight: 300 }}
+              ListEmptyComponent={
+                <Text
+                  style={{ color: "#aaa", textAlign: "center", marginTop: 12 }}
+                >
+                  Nenhum contato encontrado.
+                </Text>
+              }
               renderItem={({ item }) => (
-                <CardContacts
-                  data={item}
-                  onPress={() => setChavePix(item.chave_pix)}
-                />
+                <CardContacts item={item} navigation={navigation} />
               )}
             />
           </>
@@ -135,24 +155,39 @@ export default function ScreenSend({ navigation }) {
             >
               Transferindo
             </Text>
-            <Text style={{
+            <Text
+              style={{
                 color: "#fff",
                 fontWeight: "bold",
                 marginBottom: 12,
                 fontSize: 36,
-              }}>R$ {valor}</Text>
-            <Text style={{
+              }}
+            >
+              R$ {valor}
+            </Text>
+            <Text
+              style={{
                 color: "#fff",
                 fontWeight: "bold",
                 marginBottom: 12,
                 fontSize: 16,
-                justifyContent:"space-between",
-              }}>
-              CPF/Chave Pix:{" "}
+                justifyContent: "space-between",
+              }}
+            >
+              CPF/Chave Pix:
               <Text style={{ color: "#34E167", fontWeight: "400" }}>
                 {chave_pix}
               </Text>
             </Text>
+            <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Pagador</Text>
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{users.name}</Text>
+            </View>
+            <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Banco</Text>
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{users.id_client}</Text>
+            </View>
+            
           </View>
         );
 
@@ -162,18 +197,40 @@ export default function ScreenSend({ navigation }) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
-      <View style={{ flex:1 , paddingHorizontal:16, backgroundColor:"#232323", paddingTop:56}}>
-        <Image
-          source={require("../images/pig.png")}
-          style={{ width: 200, height: 200,paddingBottom:32 }}
-          resizeMode="contain"
-        />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View
+        style={{
+          flex: 1,
+          paddingHorizontal: 16,
+          backgroundColor: "#232323",
+          paddingTop: 56,
+        }}
+      >
+        <View
+          style={{
+            paddingTop: 32,
+            paddingBottom: 32,
+            flexDirection: "row",
+            gap: 0,
+            alignItems: "center",
+          }}
+        >
+          <Image
+            source={require("../images/LogoGreen.png")}
+            style={{ width: 40, height: 40 }}
+            resizeMode="contain"
+          />
+          <Text style={[styles.titleLogo, { color: "white" }]}>iBank</Text>
+        </View>
 
         <View style={{ width: "100%" }}>{steps()}</View>
 
         <View
-          style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 20 }}
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 20,
+          }}
         >
           {step > 1 && (
             <Button
@@ -189,6 +246,7 @@ export default function ScreenSend({ navigation }) {
               Voltar
             </Button>
           )}
+
           {step < 3 && (
             <Button
               mode="contained"

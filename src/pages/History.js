@@ -73,14 +73,14 @@ export default function History({ item, navigation }) {
         </Text>
         <Text style={styles.price}>R${users.saldo}</Text>
 
-        <Text style={[styles.titleHome, { paddingBlock: 16 }]}>Extrato </Text>
+        <Text style={[styles.titleHome, { paddingBlock: 16 }]}>Busque o extrato </Text>
         <TextInput style={styles.input} value={search} onChangeText={setSearch} placeholder="Procurar historico" />
 
-        <Text style={[styles.titleHome, { paddingBlock: 16 }]}>Ontem </Text>
+        <Text style={[styles.titleHome, { paddingBlock: 16 }]}>Hoje </Text>
         <View style={{ borderBottomColor: "#ccc", borderBottomWidth: 1 }} />
 
         <FlatList
-          data={filterExtract.slice(0, 5).reverse()}
+          data={filterExtract.reverse()}
           keyExtractor={(item) => item.id_transacao.toString()}
           renderItem={({ item }) => (
             <CardHistory item={item} navigation={navigation} />

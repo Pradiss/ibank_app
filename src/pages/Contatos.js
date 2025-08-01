@@ -26,13 +26,13 @@ export function Contacts({ navigation }) {
 
   const LoadingHistory = async () => {
     try {
-      const token = await AsyncStorage.getItem("token")
-      const id_client = await AsyncStorage.getItem("id_client")
-      const id_transacao = await AsyncStorage.getItem("id_transacao")
+      const token = await AsyncStorage.getItem("token");
+      const id_client = await AsyncStorage.getItem("id_client");
+      const id_transacao = await AsyncStorage.getItem("id_transacao");
       const res = await apiTransacao.get(`/${id_client}`, {
         headers: {
           "id-bank": "02",
-          'Authorization' : `Bearer/${token}`
+          Authorization: `Bearer/${token}`,
         },
       });
       setHistory(res.data);
@@ -48,14 +48,14 @@ export function Contacts({ navigation }) {
 
   return (
     <Pressable onPress={Keyboard.dismiss}>
-    <View style={{ padding: 16 }}>
-      <TextInput
-        style={styles.input}
-        placeholder="Digite o nome do seu contato"
-        value={search}
-        onChangeText={setSearch}
-      />
-      {/* <View style={{flexDirection:"row" , gap:8}}>
+      <View style={{ padding: 16 }}>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite o nome do seu contato"
+          value={search}
+          onChangeText={setSearch}
+        />
+        {/* <View style={{flexDirection:"row" , gap:8}}>
                 <TouchableOpacity onPress={() => navigation.navigate("ScreenSend")}>
                     <View style={{padding:12,borderWidth:1, borderColor:"#ccc",borderRadius:16,}}>
                     
@@ -78,26 +78,28 @@ export function Contacts({ navigation }) {
             </View>
         */}
 
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBlock: 12,
-        }}
-      >
-        <Text style={styles.titleHome}>Contatos</Text>
-        {/* <Text style={{fontSize:13, }}> Ver todos</Text> */}
-      </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBlock: 12,
+          }}
+        >
+          <Text style={styles.titleHome}>Contatos</Text>
+          {/* <Text style={{fontSize:13, }}> Ver todos</Text> */}
+        </View>
 
-      <FlatList
-        data={history.slice(0,5).reverse()}
-        keyExtractor={(item) => item.id_client}
-        renderItem={({ item }) => (
-          <CardContacts item={item} navigation={navigation} />
-        )}
-      />
-    </View>
+        <FlatList
+          data={[...history].slice(0, 5).reverse()}
+          keyExtractor={(item, index) =>
+            item.id_client?.toString() || index.toString()
+          }
+          renderItem={({ item }) => (
+            <CardContacts item={item} navigation={navigation} />
+          )}
+        />
+      </View>
     </Pressable>
   );
 }
