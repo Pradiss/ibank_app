@@ -184,7 +184,7 @@ export default function ScreenSend({ navigation }) {
                 width: "30%",
                 padding: 4,
               }}
-              labelStyle={{ color: "#000", textDecorationLine: "underline" }}
+              labelStyle={{ color: "#fff", textDecorationLine: "underline" }}
             >
               Voltar
             </Button>

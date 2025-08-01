@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { View, Text, TextInput, FlatList, Alert, Keyboard } from "react-native";
+import { View, Text, TextInput, FlatList, Alert, Keyboard, Pressable } from "react-native";
 import styles from "../components/Style";
 import { CardHistory } from "../components/CardHistory";
 import { apiTransacao } from "../Services/Api";
@@ -55,11 +55,11 @@ export default function History({ item, navigation }) {
 
 
   const filterExtract = history.filter(user => {
-    return user.pagador_name?.toLowerCase().includes((search || "").toLowerCase());
+    return user.recebedor_name?.toLowerCase().includes((search || "").toLowerCase());
   })
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <Pressable onPress={Keyboard.dismiss}>
       <View style={{ padding: 16 }}>
         <Text
           style={{
@@ -80,13 +80,13 @@ export default function History({ item, navigation }) {
         <View style={{ borderBottomColor: "#ccc", borderBottomWidth: 1 }} />
 
         <FlatList
-          data={filterExtract.reverse().slice(0, 7)}
+          data={filterExtract.slice(0, 5).reverse()}
           keyExtractor={(item) => item.id_transacao.toString()}
           renderItem={({ item }) => (
             <CardHistory item={item} navigation={navigation} />
           )}
         />
       </View>
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 }

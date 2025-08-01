@@ -147,7 +147,7 @@ export default function Home({ navigation }) {
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          data={transacao.reverse().slice(0,4)}
+          data={transacao.slice(0,4).reverse()}
           keyExtractor={(item) => item.id_transacao.toString()}
           renderItem={({ item }) => (
             <CarouselProfile item={item} navigation={navigation} />
@@ -174,7 +174,7 @@ export default function Home({ navigation }) {
         </Text>
       </View>
       <FlatList
-        data={transacao.slice(0,5)}
+        data={transacao.slice(0,5).reverse()}
         keyExtractor={(item) => item.id_transacao.toString()}
         renderItem={({ item }) => (
           <CardHistory item={item} navigation={navigation} />

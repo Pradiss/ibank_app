@@ -20,7 +20,7 @@ export function CardContacts({ item, navigation }) {
           style={{ alignSelf: "flex-start",backgroundColor:"#232323" }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 16, fontWeight: 600 }}>{item.name}</Text>
+          <Text style={{ fontSize: 16, fontWeight: 600 }}>{item.recebedor_name}</Text>
         </View>
         <MaterialCommunityIcons
           style={styles.icon}

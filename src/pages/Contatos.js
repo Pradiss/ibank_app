@@ -28,7 +28,8 @@ export function Contacts({ navigation }) {
     try {
       const token = await AsyncStorage.getItem("token")
       const id_client = await AsyncStorage.getItem("id_client")
-      const res = await apiClient.get(`/${id_client}`, {
+      const id_transacao = await AsyncStorage.getItem("id_transacao")
+      const res = await apiTransacao.get(`/${id_client}`, {
         headers: {
           "id-bank": "02",
           'Authorization' : `Bearer/${token}`
@@ -90,8 +91,8 @@ export function Contacts({ navigation }) {
       </View>
 
       <FlatList
-        data={history}
-        keyExtractor={(item) => item.id_client.toString()}
+        data={history.slice(0,5).reverse()}
+        keyExtractor={(item) => item.id_client}
         renderItem={({ item }) => (
           <CardContacts item={item} navigation={navigation} />
         )}
