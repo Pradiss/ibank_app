@@ -24,7 +24,7 @@ export default function History({ item, navigation }) {
           "Authorization": `Bearer ${token}`
         },
       });
-      setHistory(res.data);
+      setHistory(Array.isArray(res?.data) ? res.data : []);
     } catch (e) {
       Alert.alert("Erro ao carregar Historico", e.message);
     }
@@ -41,7 +41,7 @@ export default function History({ item, navigation }) {
           'Authorization': `Bearer ${token}`
         },
       })
-      setUsers(response.data)
+      setUsers(response?.data || {});
     } catch (error) {
       Alert.alert("erro ao carregar usuario", error);
     }

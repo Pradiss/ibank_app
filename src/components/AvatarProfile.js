@@ -9,11 +9,7 @@ import { apiClient } from "../Services/Api";
 export default function AvatarProfile({ navigation, item }) {
   const [users, setUsers] = useState("");
 
-
-
   useEffect(() => {
-
-
     const LoadingUsers = async () => {
       try {
         const id = await AsyncStorage.getItem("id_client")
@@ -29,11 +25,9 @@ export default function AvatarProfile({ navigation, item }) {
         Alert.alert("erro ao carregar usuario", e.message)
       }
     }
-
     LoadingUsers()
   },)
 
-  
   return (
     <View
       style={{

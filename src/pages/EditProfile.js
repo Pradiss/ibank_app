@@ -139,12 +139,12 @@ export default function EditProfile({ navigation }) {
             style={{ flex: 1 }}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <ScrollView contentContainerStyle={{ padding: 16, paddingTop: 70 }}>
+                <ScrollView contentContainerStyle={{ padding: 16, paddingTop: 40 }}>
                     <View style={{ alignItems: "center" }}>
 
                         <Image
                             source={require("../images/LogoGreen.png")}
-                            style={{ width: 40, height: 40, marginBlock: 32, }}
+                            style={{ width: 40, height: 40, marginBlock: 16, }}
                             resizeMode="contain"
                         />
 
@@ -268,7 +268,8 @@ export default function EditProfile({ navigation }) {
                             <Text style={{ fontSize: 18, color: "#fff" }}>Editar Perfil </Text>
                         </Pressable>
 
-                        <Text style={{ fontSize: 14, marginTop: 16, fontWeight: 400, textDecorationLine: "underline" }}>
+                        <Text  onPress={() => navigation.navigate("MyTabs",{screen:"Perfil"})}
+                        style={{ fontSize: 14, marginTop: 16, fontWeight: 400, textDecorationLine: "underline" }}>
                             Voltar ao perfil
                         </Text>
 

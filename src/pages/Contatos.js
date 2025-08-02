@@ -35,7 +35,7 @@ export function Contacts({ navigation }) {
           Authorization: `Bearer/${token}`,
         },
       });
-      setHistory(res.data);
+      setHistory(Array.isArray(res?.data) ? res.data : []);
     } catch (e) {
       Alert.alert("Erro ao carregar Historico", e.message);
     }
@@ -46,8 +46,25 @@ export function Contacts({ navigation }) {
     }
   }, [isFocused]);
 
+  const nomesUnicos = [];
+const contatosFiltrados = history
+  .filter((item) => {
+    const nome = item.recebedor_name;
+    const nomeFiltrado = nome?.toLowerCase().includes((search || "").toLowerCase());
+    const aindaNaoAdicionado = !nomesUnicos.includes(nome);
+
+    if (nomeFiltrado && aindaNaoAdicionado) {
+      nomesUnicos.push(nome);
+      return true;
+    }
+
+    return false;
+  })
+  .reverse() 
+  .slice(0, 10);
+
   return (
-    <Pressable onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{ padding: 16 }}>
         <TextInput
           style={styles.input}
@@ -91,7 +108,7 @@ export function Contacts({ navigation }) {
         </View>
 
         <FlatList
-          data={[...history].reverse().slice(0,10)}
+          data={[...contatosFiltrados].reverse().slice(0,10)}
           keyExtractor={(item, index) =>
             item.id_client?.toString() || index.toString()
           }
@@ -100,6 +117,6 @@ export function Contacts({ navigation }) {
           )}
         />
       </View>
-    </Pressable>
+    </TouchableWithoutFeedback>
   );
 }

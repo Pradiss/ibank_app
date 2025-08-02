@@ -20,7 +20,6 @@ import { apiTransacao } from "../Services/Api";
 import { apiClient } from "../Services/Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 export default function Home({ navigation }) {
   const [history, setHistory] = useState([]);
   const [users, setUsers] = useState([]);
@@ -29,13 +28,12 @@ export default function Home({ navigation }) {
 
   const LoadingUsers = async () => {
     try {
-
-      const token = await AsyncStorage.getItem('token');
-      const id = await AsyncStorage.getItem("id_client")
+      const token = await AsyncStorage.getItem("token");
+      const id = await AsyncStorage.getItem("id_client");
       const response = await apiClient.get(`/${id}`, {
         headers: {
           "id-bank": "02",
-          'Authorization':`Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       setUsers(response.data);
@@ -44,19 +42,22 @@ export default function Home({ navigation }) {
     }
   };
 
-   const LoadingHistory = async () => {
+  const LoadingHistory = async () => {
     try {
-      const token = await AsyncStorage.getItem("token")
-      const id = await AsyncStorage.getItem("id_client")
+      const token = await AsyncStorage.getItem("token");
+      const id = await AsyncStorage.getItem("id_client");
+
       const res = await apiTransacao.get(`${id}`, {
         headers: {
           "id-bank": "02",
-          "Authorization" : `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
-      setTransacao(res.data);
+
+      setTransacao(Array.isArray(res?.data) ? res.data : []);
+
     } catch (e) {
-      Alert.alert("Erro ao carregar Historico", e.message);
+      Alert.alert("Erro ao carregar histórico", e.message);
     }
   };
 
@@ -66,6 +67,19 @@ export default function Home({ navigation }) {
       LoadingHistory();
     }
   }, [isFocused]);
+
+  const nomesUnicos = [];
+  const contatosFiltrados = transacao
+    .reverse()
+    .filter((item) => {
+      const nome = item.recebedor_name;
+      if (!nomesUnicos.includes(nome)) {
+        nomesUnicos.push(nome);
+        return true;
+      }
+      return false;
+    })
+    .slice(0, 5);
 
   return (
     <View style={{ paddingTop: 50, paddingHorizontal: 16 }}>
@@ -85,7 +99,7 @@ export default function Home({ navigation }) {
 
       <View style={{ marginTop: 12 }}></View>
 
-      <View style={{ flexDirection: "row", justifyContent:"space-around" }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         <TouchableOpacity onPress={() => navigation.navigate("Transferir Pix")}>
           <View style={styles.cardCategory}>
             <MaterialIcons
@@ -99,7 +113,7 @@ export default function Home({ navigation }) {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Resultado")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Scan")}>
           <View style={styles.cardCategory}>
             <MaterialCommunityIcons
               style={styles.icon}
@@ -133,7 +147,7 @@ export default function Home({ navigation }) {
       >
         <Pressable
           style={styles.buttonCircle}
-          onPress={() => navigation.navigate("ScreenSend")}
+          onPress={() => navigation.navigate("Transferir Pix")}
         >
           <MaterialCommunityIcons
             style={styles.icon}
@@ -147,7 +161,7 @@ export default function Home({ navigation }) {
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          data={transacao.reverse().slice(0,4)}
+          data={contatosFiltrados}
           keyExtractor={(item) => item.id_transacao.toString()}
           renderItem={({ item }) => (
             <CarouselProfile item={item} navigation={navigation} />
@@ -174,7 +188,7 @@ export default function Home({ navigation }) {
         </Text>
       </View>
       <FlatList
-        data={transacao.slice(0,3)}
+        data={transacao.slice(0, 3)}
         keyExtractor={(item) => item.id_transacao.toString()}
         renderItem={({ item }) => (
           <CardHistory item={item} navigation={navigation} />

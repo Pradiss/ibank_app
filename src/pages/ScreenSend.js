@@ -174,42 +174,14 @@ export default function ScreenSend({ navigation }) {
                 marginBottom: 12,
                 fontSize: 16,
                 justifyContent: "space-between",
-                textTransform:"uppercase"
+                
               }}
             >
               CPF/Chave Pix: {""}
-              <Text style={{ color: "#34E167", fontWeight: "400" }}>
+              <Text style={{ color: "#34E167", fontWeight: "400"  }}>
                 {chave_pix}
               </Text>
             </Text>
-            <View
-              style={{
-                marginBottom: 14,
-                justifyContent: "space-between",
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>
-                Pagador
-              </Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>
-                {transacao.recebedor_name}
-              </Text>
-            </View>
-            <View
-              style={{
-                marginBottom: 14,
-                justifyContent: "space-between",
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>
-                Banco
-              </Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>
-                {transacao.banco_recebedor}
-              </Text>
-            </View>
           </View>
         );
 

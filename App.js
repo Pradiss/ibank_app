@@ -25,6 +25,7 @@ import RegisterKey from "./src/pages/RegisterKey";
 import EditProfile from "./src/pages/EditProfile";
 import KeySave from "./src/pages/KeySave";
 import RegisterChave from "./src/pages/RegisterChave";
+import ResultExtrato from "./src/pages/ResultExtrato";
 
 const Stack = createNativeStackNavigator();
 
@@ -98,6 +99,7 @@ export default function App() {
           <Stack.Screen name="MyTabs" component={MyTabs} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Resultado" component={Result} />
+          <Stack.Screen name="Extrato" component={ResultExtrato} />
           <Stack.Screen name="Create" component={Create} />
           <Stack.Screen name="FormRegister" component={FormRegister} />
           <Stack.Screen
