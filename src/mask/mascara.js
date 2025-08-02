@@ -45,6 +45,10 @@ export const formatUF = (value) =>
 
 
 export const formatReal = (value) => {
+  if (typeof value === "string") {
+    value = value.replace(",", "."); // converte vírgula para ponto
+  }
+
   const numero = parseFloat(value);
   if (isNaN(numero)) return "0,00";
 
