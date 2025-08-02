@@ -87,11 +87,11 @@ export function Contacts({ navigation }) {
           }}
         >
           <Text style={styles.titleHome}>Contatos</Text>
-          {/* <Text style={{fontSize:13, }}> Ver todos</Text> */}
+          
         </View>
 
         <FlatList
-          data={[...history].slice(0, 5).reverse()}
+          data={[...history].reverse().slice(0,10)}
           keyExtractor={(item, index) =>
             item.id_client?.toString() || index.toString()
           }

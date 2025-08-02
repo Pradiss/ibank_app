@@ -23,7 +23,6 @@ export default function KeyPix({ navigation }) {
                     <Text style={styles.titleLogo}>iBank</Text>
                 </View>
 
-
                 <Pressable
                     onPress={() => navigation.navigate("Editar Chave")}
                     style={[
@@ -56,7 +55,7 @@ export default function KeyPix({ navigation }) {
                     <Text style={styles.textButtonPerfil}>Cadastrar Chave</Text>
                 </Pressable>
 
-                <Pressable
+                {/* <Pressable
                     onPress={() => navigation.navigate("RegisterKey")}
                     style={[
                         styles.buttonPerfil,
@@ -70,7 +69,7 @@ export default function KeyPix({ navigation }) {
                         color="#000"
                     />
                     <Text style={styles.textButtonPerfil}>Cadastrar Chave Aleatória</Text>
-                </Pressable>
+                </Pressable> */}
 
                 <Pressable
                     onPress={() => navigation.navigate("Chaves Pix")}
@@ -87,8 +86,6 @@ export default function KeyPix({ navigation }) {
                     />
                     <Text style={styles.textButtonPerfil}>Chaves Salvas</Text>
                 </Pressable>
-
-
             </View>
         </TouchableWithoutFeedback>
     );

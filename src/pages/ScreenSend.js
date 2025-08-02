@@ -19,7 +19,7 @@ import { Button } from "react-native-paper";
 export default function ScreenSend({ navigation }) {
   const [chave_pix, setChavePix] = useState("");
   const [users, setUsers] = useState([]);
-  const [transacao,setTransacao] = useState([])
+  const [transacao, setTransacao] = useState([]);
   const [valor, setValor] = useState("");
   const [step, setStep] = useState(1);
 
@@ -85,7 +85,7 @@ export default function ScreenSend({ navigation }) {
   useEffect(() => {
     if (isFocused) {
       LoadingUsers();
-       LoadingTransacao()
+      LoadingTransacao();
     }
   }, [isFocused]);
 
@@ -141,21 +141,6 @@ export default function ScreenSend({ navigation }) {
               value={chave_pix}
               onChangeText={setChavePix}
             />
-            {/* <FlatList
-              data={users}
-              keyExtractor={(item, index) => item.id_client?.toString() || index.toString()}
-              style={{ flexGrow: 0, maxHeight: 300 }}
-              ListEmptyComponent={
-                <Text
-                  style={{ color: "#aaa", textAlign: "center", marginTop: 12 }}
-                >
-                  Nenhum contato encontrado.
-                </Text>
-              }
-              renderItem={({ item }) => (
-                <CardContacts item={item} navigation={navigation} />
-              )}
-            /> */}
           </>
         );
 
@@ -177,7 +162,7 @@ export default function ScreenSend({ navigation }) {
                 color: "#fff",
                 fontWeight: "bold",
                 marginBottom: 12,
-                fontSize: 36,
+                fontSize: 42,
               }}
             >
               R$ {valor}
@@ -189,22 +174,42 @@ export default function ScreenSend({ navigation }) {
                 marginBottom: 12,
                 fontSize: 16,
                 justifyContent: "space-between",
+                textTransform:"uppercase"
               }}
             >
-              CPF/Chave Pix:
+              CPF/Chave Pix: {""}
               <Text style={{ color: "#34E167", fontWeight: "400" }}>
                 {chave_pix}
               </Text>
             </Text>
-            <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Pagador</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{transacao.recebedor_name}</Text>
+            <View
+              style={{
+                marginBottom: 14,
+                justifyContent: "space-between",
+                flexDirection: "row",
+              }}
+            >
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>
+                Pagador
+              </Text>
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>
+                {transacao.recebedor_name}
+              </Text>
             </View>
-            <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Banco</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{transacao.banco_recebedor}</Text>
+            <View
+              style={{
+                marginBottom: 14,
+                justifyContent: "space-between",
+                flexDirection: "row",
+              }}
+            >
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>
+                Banco
+              </Text>
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>
+                {transacao.banco_recebedor}
+              </Text>
             </View>
-            
           </View>
         );
 
