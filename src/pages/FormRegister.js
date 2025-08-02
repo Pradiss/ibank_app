@@ -11,7 +11,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
-
+  Alert,
+  TouchableOpacity,
 } from "react-native";
 import styles from "../components/Style";
 import { Button } from "react-native-paper";
@@ -79,6 +80,52 @@ export default function FormRegister({ navigation }) {
       }
     }
   }
+
+const handleNextStep = () => {
+  switch (step) {
+    case 1:
+      if (!formData.name.trim() || !formData.cpf.trim()) {
+        Alert.alert("Campos obrigatórios", "Preencha o nome e o CPF.");
+        return;
+      }
+      break;
+    case 2:
+      if (!formData.phone.trim() || !formData.cep.trim()) {
+        Alert.alert("Campos obrigatórios", "Preencha o telefone e o CEP.");
+        return;
+      }
+      break;
+    case 3:
+      if (!formData.street.trim() || !formData.number.trim() || !formData.location.trim()) {
+        Alert.alert("Campos obrigatórios", "Preencha a rua, número e bairro.");
+        return;
+      }
+      break;
+    case 4:
+      if (!formData.city.trim() || !formData.state.trim() || !formData.country.trim()) {
+        Alert.alert("Campos obrigatórios", "Preencha cidade, estado e país.");
+        return;
+      }
+      break;
+    case 5:
+      if (!formData.email.trim() || !formData.password.trim()) {
+        Alert.alert("Campos obrigatórios", "Preencha e-mail e senha.");
+        return;
+      }
+      if (!isEmailValid(formData.email)) {
+        Alert.alert("E-mail inválido", "Digite um e-mail válido.");
+        return;
+      }
+      if (formData.password.length < 6) {
+        Alert.alert("Senha fraca", "A senha deve ter pelo menos 6 caracteres.");
+        return;
+      }
+      break;
+  }
+
+  setStep((s) => s + 1); // avançar para a próxima etapa se passou na validação
+};
+
 
   const nextPass = () => {
     if (step < 4) setStep(step + 1);
@@ -230,7 +277,7 @@ export default function FormRegister({ navigation }) {
           <>
             <View style={{ paddingBlock: 8, paddingBottom:12}}>
 
-              <Text style={{ color: "#fff", fontWeight: "bold", marginBottom: 12, fontSize: 24 }}>
+              <Text style={{ color: "#fff", fontWeight: "bold", marginBottom: 12, fontSize: 24 , }}>
                 Confirme seus dados:
               </Text>
               <Text style={styles.textRegister}>
@@ -309,7 +356,7 @@ export default function FormRegister({ navigation }) {
             {step < 6 && (
               <Button
                 mode="contained"
-                onPress={() => setStep((s) => s + 1)}
+                onPress={handleNextStep}
                 style={{ backgroundColor: "#34E167", width: "50%", padding: 4, }}
                 labelStyle={{ color: "#000" }}
               >
