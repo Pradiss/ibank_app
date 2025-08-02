@@ -16,7 +16,7 @@ export default function KeySave({ navigation }) {
 
       const id_client = await AsyncStorage.getItem("id_client")
       const token = await AsyncStorage.getItem("token")
-      const id_key = await AsyncStorage.getItem("id_chave")
+      
       const res = await apiRegisterKey.get(`/`,
         {
           headers: {

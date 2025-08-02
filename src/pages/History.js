@@ -20,7 +20,7 @@ export default function History({ navigation }) {
   const [history, setHistory] = useState([]);
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState({});
-  const [showEye, setShowEye] = useState(false)
+  const [showEye, setShowEye] = useState(false);
   const isFocused = useIsFocused();
 
   const LoadingHistory = async () => {
@@ -70,31 +70,49 @@ export default function History({ navigation }) {
     <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <FlatList
-          data={filterExtract.reverse().slice(0,7)}
+          data={filterExtract.reverse().slice(0, 7)}
           keyExtractor={(item) => item.id_transacao.toString()}
           renderItem={({ item }) => (
             <CardHistory item={item} navigation={navigation} />
           )}
-          contentContainerStyle={{ paddingBottom: 160, paddingHorizontal: 16, paddingTop: 20 }}
+          contentContainerStyle={{
+            paddingBottom: 160,
+            paddingHorizontal: 16,
+            paddingTop: 20,
+          }}
           ListHeaderComponent={
             <>
-              <Text style={{ fontSize: 16, fontWeight: "500", marginBottom:8 }}>
-                Saldo Disponível </Text>
+              <Text
+                style={{ fontSize: 16, fontWeight: "500", marginBottom: 8 }}
+              >
+                Saldo Disponível{" "}
+              </Text>
 
-              <View style={{ flexDirection: "row",justifyContent:"space-between", alignItems:"center"  }}>
-              <Text style={styles.price}>R${showEye ? formatReal(users.saldo) : "••••••"}</Text>
-              <MaterialCommunityIcons
-                style={styles.icon}
-                name={showEye ? "eye" : "eye-off"}
-                size={24}
-                color="#000"
-                onPress={() => setShowEye(!showEye)}
-              /> 
-            </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={styles.price}>
+                  R${showEye ? formatReal(users.saldo) : "••••••"}
+                </Text>
+                <MaterialCommunityIcons
+                  style={styles.icon}
+                  name={showEye ? "eye" : "eye-off"}
+                  size={24}
+                  color="#000"
+                  onPress={() => setShowEye(!showEye)}
+                />
+              </View>
 
-              <Text style={[styles.titleHome, { paddingTop: 24, marginBottom:8 }]}>
-                Busque o extrato </Text>
-                
+              <Text
+                style={[styles.titleHome, { paddingTop: 24, marginBottom: 8 }]}
+              >
+                Busque o extrato{" "}
+              </Text>
+
               <TextInput
                 style={styles.input}
                 value={search}

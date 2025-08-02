@@ -26,6 +26,7 @@ import EditProfile from "./src/pages/EditProfile";
 import KeySave from "./src/pages/KeySave";
 import RegisterChave from "./src/pages/RegisterChave";
 import ResultExtrato from "./src/pages/ResultExtrato";
+import OnPressSend from "./src/pages/OnPressSend";
 
 const Stack = createNativeStackNavigator();
 
@@ -101,6 +102,7 @@ export default function App() {
           <Stack.Screen name="Resultado" component={Result} />
           <Stack.Screen name="ResultExtrato" component={ResultExtrato} />
           <Stack.Screen name="Create" component={Create} />
+          <Stack.Screen name="OnPressSend" component={OnPressSend} />
           <Stack.Screen name="FormRegister" component={FormRegister} />
           <Stack.Screen
             name="Transferir Pix"
