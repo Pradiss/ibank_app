@@ -19,6 +19,7 @@ import { Button } from "react-native-paper";
 export default function ScreenSend({ navigation }) {
   const [chave_pix, setChavePix] = useState("");
   const [users, setUsers] = useState([]);
+  const [transacao,setTransacao] = useState([])
   const [valor, setValor] = useState("");
   const [step, setStep] = useState(1);
 
@@ -35,6 +36,21 @@ export default function ScreenSend({ navigation }) {
         },
       });
       setUsers(res.data);
+    } catch (e) {
+      Alert.alert("Erro ao carregar usuários", e.message);
+    }
+  };
+  const LoadingTransacao = async () => {
+    try {
+      const id_client = await AsyncStorage.getItem("id_client");
+      const token = await AsyncStorage.getItem("token");
+      const res = await apiTransacao.get(`/${id_client}`, {
+        headers: {
+          "id-bank": "02",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setTransacao(res.data);
     } catch (e) {
       Alert.alert("Erro ao carregar usuários", e.message);
     }
@@ -69,6 +85,7 @@ export default function ScreenSend({ navigation }) {
   useEffect(() => {
     if (isFocused) {
       LoadingUsers();
+       LoadingTransacao()
     }
   }, [isFocused]);
 
@@ -124,7 +141,7 @@ export default function ScreenSend({ navigation }) {
               value={chave_pix}
               onChangeText={setChavePix}
             />
-            <FlatList
+            {/* <FlatList
               data={users}
               keyExtractor={(item, index) => item.id_client?.toString() || index.toString()}
               style={{ flexGrow: 0, maxHeight: 300 }}
@@ -138,7 +155,7 @@ export default function ScreenSend({ navigation }) {
               renderItem={({ item }) => (
                 <CardContacts item={item} navigation={navigation} />
               )}
-            />
+            /> */}
           </>
         );
 
@@ -181,11 +198,11 @@ export default function ScreenSend({ navigation }) {
             </Text>
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Pagador</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{users.name}</Text>
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{transacao.recebedor_name}</Text>
             </View>
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Banco</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{users.id_client}</Text>
+              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{transacao.banco_recebedor}</Text>
             </View>
             
           </View>
