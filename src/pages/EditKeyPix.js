@@ -35,7 +35,7 @@ const LoadingUsers = async () => {
     });
   } catch (error) {
     console.error("Erro ao carregar usuário:", error);
-    Alert.alert("Erro ao carregar usuário", error.message || "Erro desconhecido");
+    Alert.alert("Erro ao carregar usuário", error.message);
   }
 };
 
@@ -46,16 +46,17 @@ const LoadingUsers = async () => {
 
   const editKey = async () => {
     if (!selectedKey) {
-      Alert.alert("Erro", "Selecione uma chave para cadastrar.");
+      Alert.alert("Erro", "Selecione uma chave para Editar.");
       return;
     }
 
     try {
       const id_client = await AsyncStorage.getItem("id_client");
       const token = await AsyncStorage.getItem("token");
+      const id_chave = await AsyncStorage.getItem("id_chave");
 
       await apiRegisterKey.put(
-        `/`,
+        `/${id_chave}`,
         {
           id_client,
           name: selectedKey, // a chave selecionada
@@ -70,7 +71,7 @@ const LoadingUsers = async () => {
 
       navigation.navigate("MyTabs");
     } catch (e) {
-      Alert.alert("ERRO ao Cadastrar a chave pix", e.message);
+      Alert.alert("ERRO ao Editar a chave pix", e.message);
     }
   };
 
@@ -81,14 +82,16 @@ const LoadingUsers = async () => {
         <Text style={styles.titleLogo}>iBank</Text>
       </View>
 
-      <Text style={[styles.titleHome,{paddingBottom:16}]}>Escolha uma chave PIX para cadastrar</Text>
-     <Text style={{marginBottom: 8}}> Usar Telefone:</Text>
+      <Text style={[styles.titleHome,{paddingBottom:16}]}>Escolha uma chave PIX para editar</Text>
+
+     <Text style={{marginBottom: 8}}> Usar Email:</Text>
+
       {options.email && (
         <Pressable onPress={() => setSelectedKey(options.email)} style={[styles.input, selectedKey === options.email && { borderColor: "#34E167", borderWidth: 2 }]}>
           <Text style={{ color: "#000" }}>{options.email}</Text>
         </Pressable>
       )}
-         <Text style={{marginBottom: 8}}> Usar Telefone:</Text>
+         <Text style={{marginBottom: 8}}> Usar CPF:</Text>
       {options.cpf && (
         <Pressable onPress={() => setSelectedKey(options.cpf)} style={[styles.input, selectedKey === options.cpf && { borderColor: "#34E167", borderWidth: 2 }]}>
           <Text style={{ color: "#000" }}>{options.cpf}</Text>

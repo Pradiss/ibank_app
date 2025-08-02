@@ -82,13 +82,13 @@ const LoadingUsers = async () => {
       </View>
 
       <Text style={[styles.titleHome,{paddingBottom:16}]}>Escolha uma chave PIX para cadastrar</Text>
-     <Text style={{marginBottom: 8}}> Usar Telefone:</Text>
+     <Text style={{marginBottom: 8}}> Usar E-mail:</Text>
       {options.email && (
         <Pressable onPress={() => setSelectedKey(options.email)} style={[styles.input, selectedKey === options.email && { borderColor: "#34E167", borderWidth: 2 }]}>
           <Text style={{ color: "#000" }}>{options.email}</Text>
         </Pressable>
       )}
-         <Text style={{marginBottom: 8}}> Usar Telefone:</Text>
+         <Text style={{marginBottom: 8}}> Usar CPF:</Text>
       {options.cpf && (
         <Pressable onPress={() => setSelectedKey(options.cpf)} style={[styles.input, selectedKey === options.cpf && { borderColor: "#34E167", borderWidth: 2 }]}>
           <Text style={{ color: "#000" }}>{options.cpf}</Text>
