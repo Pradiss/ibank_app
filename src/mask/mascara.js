@@ -42,3 +42,14 @@ export const formatUF = (value) =>
     .replace(/[^a-zA-Z]/g, "")
     .toUpperCase() 
     .slice(0, 2);
+
+
+export const formatReal = (value) => {
+  const numero = parseFloat(value);
+  if (isNaN(numero)) return "0,00";
+
+  return numero.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};

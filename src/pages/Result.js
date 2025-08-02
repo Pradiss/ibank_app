@@ -4,7 +4,9 @@ import react, { useState, useEffect } from "react";
 import { apiTransacao } from "../Services/Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
-import { Button } from "react-native-paper";
+import { ActivityIndicator, Button } from "react-native-paper";
+import { formatReal } from "../mask/mascara";
+
 
 export default function Result({ navigation }) {
   const [transacao, setTransacao] = useState([]);
@@ -75,7 +77,7 @@ export default function Result({ navigation }) {
                 Transferindo
               </Text>
               <Text style={[styles.price, { color: "#34E167", marginBottom: 8 }]}>
-                R${ultimoPix.valor}
+               R$ {ultimoPix.valor}
               </Text>
               <Text style={{ color: "#999", fontSize: 16 }}>
                 para{" "}
@@ -89,28 +91,29 @@ export default function Result({ navigation }) {
 
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Pagador</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.pagador_name}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.pagador_name}</Text>
             </View>
 
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Recebedor</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.recebedor_name}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.recebedor_name}</Text>
             </View>
 
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Instituição</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_pagador}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_pagador}</Text>
             </View>
 
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Instituição recebedor </Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_recebedor}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_recebedor}</Text>
             </View>
 
             
           </View>
         ) : (
-          <Text>Nenhuma transação encontrada.</Text>
+          <ActivityIndicator type={"large"} animating={true} color={"#34E167"}/>
+
         )}
       </View>
 

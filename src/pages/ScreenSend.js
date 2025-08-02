@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 import { CardContacts } from "../components/CardContacts";
 import { Button } from "react-native-paper";
+import { formatReal } from "../mask/mascara";
 
 export default function ScreenSend({ navigation }) {
   const [chave_pix, setChavePix] = useState("");
@@ -105,8 +106,8 @@ export default function ScreenSend({ navigation }) {
                 color: "#fff",
               }}
             >
-              Saldo da conta R${" "}
-              <Text style={{ color: "#34E167" }}>{users.saldo}</Text>
+              Saldo da conta {" "}
+              <Text style={{ color: "#34E167" }}>{formatReal(users.saldo)}</Text>
             </Text>
             <TextInput
               style={styles.input}
@@ -123,12 +124,12 @@ export default function ScreenSend({ navigation }) {
         return (
           <>
             <Text style={{ fontSize: 26, fontWeight: "500", color: "#fff" }}>
-              Para quem você quer transferir o Pix? R$
+              Para quem você quer transferir o Pix?
               <Text
                 style={{ fontSize: 26, fontWeight: "400", color: "#34E167" }}
               >
                 {" "}
-                {valor}
+                {formatReal(valor)}
               </Text>
             </Text>
             <Text style={{ paddingVertical: 8, fontSize: 16, color: "#fff" }}>
@@ -165,7 +166,7 @@ export default function ScreenSend({ navigation }) {
                 fontSize: 42,
               }}
             >
-              R$ {valor}
+             <Text style={{ color: "#34E167" }}>{ formatReal(valor)}</Text>
             </Text>
             <Text
               style={{

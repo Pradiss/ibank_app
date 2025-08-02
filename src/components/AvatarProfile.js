@@ -55,16 +55,7 @@ export default function AvatarProfile({ navigation, item }) {
         </View>
       </TouchableOpacity>
 
-      <View style={{ flexDirection: "row", gap: 8 }}>
-        <MaterialCommunityIcons
-          style={styles.icon}
-          name="eye"
-          size={24}
-          color="#000"
-          onPress={() => navigation.navigate("Notification")}
-        />
-        
-      </View>
+      
     </View>
   );
 }

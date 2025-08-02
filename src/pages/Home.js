@@ -19,12 +19,14 @@ import { CarouselProfile } from "../components/CarouselProfile";
 import { apiTransacao } from "../Services/Api";
 import { apiClient } from "../Services/Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { formatReal } from "../mask/mascara";
 
 export default function Home({ navigation }) {
   const [history, setHistory] = useState([]);
   const [users, setUsers] = useState([]);
   const [transacao, setTransacao] = useState([]);
   const isFocused = useIsFocused();
+  const [showEye, setShowEye] = useState(false)
 
   const LoadingUsers = async () => {
     try {
@@ -69,9 +71,7 @@ export default function Home({ navigation }) {
   }, [isFocused]);
 
   const nomesUnicos = [];
-  const contatosFiltrados = transacao
-    .reverse()
-    .filter((item) => {
+  const contatosFiltrados =  [...transacao].reverse() .filter((item) => {
       const nome = item.recebedor_name;
       if (!nomesUnicos.includes(nome)) {
         nomesUnicos.push(nome);
@@ -95,7 +95,16 @@ export default function Home({ navigation }) {
       >
         Meus Saldo
       </Text>
-      <Text style={styles.price}>R${users.saldo}</Text>
+          <View style={{ flexDirection: "row",justifyContent:"space-between", alignItems:"center"  }}>
+              <Text style={styles.price}>R${showEye ? formatReal(users.saldo) : "••••••"}</Text>
+              <MaterialCommunityIcons
+                style={styles.icon}
+                name={showEye ? "eye" : "eye-off"}
+                size={24}
+                color="#000"
+                onPress={() => setShowEye(!showEye)}
+              /> 
+            </View>
 
       <View style={{ marginTop: 12 }}></View>
 
@@ -188,7 +197,7 @@ export default function Home({ navigation }) {
         </Text>
       </View>
       <FlatList
-        data={transacao.slice(0, 3)}
+        data={[...transacao].reverse().slice(0, 3)}
         keyExtractor={(item) => item.id_transacao.toString()}
         renderItem={({ item }) => (
           <CardHistory item={item} navigation={navigation} />

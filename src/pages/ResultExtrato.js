@@ -4,7 +4,8 @@ import react, { useState, useEffect } from "react";
 import { apiTransacao } from "../Services/Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
-import { Button } from "react-native-paper";
+import { ActivityIndicator, Button } from "react-native-paper";
+import { formatReal } from "../mask/mascara";
 
 export default function ResultExtrato({ navigation }) {
   const [transacao, setTransacao] = useState([]);
@@ -106,11 +107,9 @@ export default function ResultExtrato({ navigation }) {
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Instituição recebedor </Text>
               <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_recebedor}</Text>
             </View>
-
-            
           </View>
         ) : (
-          <Text style={{color :"#34E167", fontWeight: "bold", fontSize: 24}}>Nenhuma transação encontrada.</Text>
+          <ActivityIndicator type={"large"} animating={true} color={"#34E167"}/>
         )}
       </View>
 

@@ -5,7 +5,7 @@ import styles from "./Style";
 
 export function CardContacts({ item, navigation }) {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("ScreenSend")}>
+    <TouchableOpacity onPress={() => navigation.navigate("Transferir Pix")}>
       <View
         style={{
           flexDirection: "row",

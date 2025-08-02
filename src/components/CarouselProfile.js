@@ -4,7 +4,7 @@ import styles from "./Style";
 
 export function CarouselProfile({ item, navigation }) {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("ScreenSend", {item})}>
+    <TouchableOpacity onPress={() => navigation.navigate("Transferir Pix", {item})}>
       <View style={styles.blocoCard}>
         <Avatar.Image
           size={46}
