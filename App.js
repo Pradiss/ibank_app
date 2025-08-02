@@ -99,7 +99,7 @@ export default function App() {
           <Stack.Screen name="MyTabs" component={MyTabs} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Resultado" component={Result} />
-          <Stack.Screen name="Extrato" component={ResultExtrato} />
+          <Stack.Screen name="ResultExtrato" component={ResultExtrato} />
           <Stack.Screen name="Create" component={Create} />
           <Stack.Screen name="FormRegister" component={FormRegister} />
           <Stack.Screen

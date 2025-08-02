@@ -3,7 +3,7 @@ import { Avatar } from "react-native-paper";
 
 export function CardHistory({ item, navigation }) {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("Extrato", {item})}>
+    <TouchableOpacity onPress={() => navigation.navigate("ResultExtrato")}>
       <View
         style={{
           flexDirection: "row",

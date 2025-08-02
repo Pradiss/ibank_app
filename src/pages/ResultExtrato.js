@@ -72,7 +72,7 @@ export default function ResultExtrato({ navigation }) {
                   marginBottom: 16,
                 }}
               >
-                Transferindo
+                Transferido
               </Text>
               <Text style={[styles.price, { color: "#34E167", marginBottom: 8 }]}>
                 R${ultimoPix.valor}
@@ -89,28 +89,28 @@ export default function ResultExtrato({ navigation }) {
 
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Pagador</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.pagador_name}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.pagador_name}</Text>
             </View>
 
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Recebedor</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.recebedor_name}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.recebedor_name}</Text>
             </View>
 
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Instituição</Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_pagador}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_pagador}</Text>
             </View>
 
             <View style={{ marginBottom: 14 , justifyContent:"space-between", flexDirection:"row"}}>
               <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }}>Instituição recebedor </Text>
-              <Text style={{ color: "#999", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_recebedor}</Text>
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }} >{ultimoPix.banco_recebedor}</Text>
             </View>
 
             
           </View>
         ) : (
-          <Text>Nenhuma transação encontrada.</Text>
+          <Text style={{color :"#34E167", fontWeight: "bold", fontSize: 24}}>Nenhuma transação encontrada.</Text>
         )}
       </View>
 
