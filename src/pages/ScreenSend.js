@@ -48,7 +48,7 @@ export default function ScreenSend({ navigation }) {
       const res = await apiTransacao.get(`/${id_client}`, {
         headers: {
           "id-bank": "02",
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
       setTransacao(res.data);
@@ -58,30 +58,30 @@ export default function ScreenSend({ navigation }) {
   };
 
   const sendPix = async () => {
-    try {
-      const token = await AsyncStorage.getItem("token");
-      const pagador = await AsyncStorage.getItem("id_client");
+  try {
+    const token = await AsyncStorage.getItem("token");
+    const pagador = await AsyncStorage.getItem("id_client");
 
-      await apiTransacao.post(
-        "/",
-        {
-          valor,
-          pagador,
-          chave_pix,
+    const res = await apiTransacao.post(
+      "/",
+      {
+        valor,
+        pagador,
+        chave_pix,
+      },
+      {
+        headers: {
+          "id-bank": "02",
+          'Authorization': `Bearer ${token}`,
         },
-        {
-          headers: {
-            "id-bank": "02",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      }
+    );
 
-      navigation.navigate("Resultado");
-    } catch (e) {
-      Alert.alert("Erro ao enviar Pix", e.message);
-    }
-  };
+    navigation.navigate("Resultado")
+  } catch (e) {
+    Alert.alert("Erro ao enviar Pix", e.message);
+  }
+};
 
   useEffect(() => {
     if (isFocused) {

@@ -71,15 +71,16 @@ export default function Home({ navigation }) {
   }, [isFocused]);
 
   const nomesUnicos = [];
-  const contatosFiltrados =  [...transacao].reverse() .filter((item) => {
-      const nome = item.recebedor_name;
-      if (!nomesUnicos.includes(nome)) {
-        nomesUnicos.push(nome);
-        return true;
-      }
-      return false;
-    })
-    .slice(0, 5);
+  const contatosFiltrados = [...transacao].reverse()
+  .filter((item) => {
+    const nome = item.recebedor_name;
+    if (!nomesUnicos.includes(nome)) {
+      nomesUnicos.push(nome);
+      return true;
+    }
+    return false;
+  })
+  .slice(0, 5);
 
   return (
     <View style={{ paddingTop: 50, paddingHorizontal: 16 }}>
