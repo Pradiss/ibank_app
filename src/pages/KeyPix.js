@@ -30,7 +30,7 @@ export default function KeyPix({ navigation }) {
           <Text style={styles.titleLogo}>iBank</Text>
         </View>
 
-        <Pressable
+        {/* <Pressable
           onPress={() => navigation.navigate("Editar Chave")}
           style={[
             styles.buttonPerfil,
@@ -44,7 +44,7 @@ export default function KeyPix({ navigation }) {
             color="#000"
           />
           <Text style={styles.textButtonPerfil}>Editar Chave</Text>
-        </Pressable>
+        </Pressable> */}
 
         <Pressable
           onPress={() => navigation.navigate("Cadastrar Chave")}

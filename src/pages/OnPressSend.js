@@ -17,14 +17,13 @@ import { CardContacts } from "../components/CardContacts";
 import { Button } from "react-native-paper";
 import { formatReal } from "../mask/mascara";
 
-export default function OnPressSend({ navigation }) {
+export default function OnPressSend({ navigation , route}) {
   const [chave_pix, setChavePix] = useState("");
   const [users, setUsers] = useState([]);
   const [transacao, setTransacao] = useState([]);
-  const [valor, setValor] = useState("");
+  const [valorPix, setValor] = useState("");
   const [step, setStep] = useState(1);
-  
-
+  const {nome, chavePix} = route.params
   const isFocused = useIsFocused();
 
   const LoadingUsers = async () => {
@@ -34,7 +33,7 @@ export default function OnPressSend({ navigation }) {
       const res = await apiClient.get(`/${id_client}`, {
         headers: {
           "id-bank": "02",
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
       setUsers(res.data);
@@ -49,7 +48,7 @@ export default function OnPressSend({ navigation }) {
       const res = await apiTransacao.get(`/${id_client}`, {
         headers: {
           "id-bank": "02",
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
       setTransacao(res.data);
@@ -66,7 +65,7 @@ export default function OnPressSend({ navigation }) {
       await apiTransacao.post(
         "/",
         {
-          valor,
+          valorPix,
           pagador,
           chave_pix,
         },
@@ -88,7 +87,11 @@ export default function OnPressSend({ navigation }) {
     if (isFocused) {
       LoadingUsers();
       LoadingTransacao();
+      if(chavePix){
+        setChavePix(chavePix)
+      }
     }
+
   }, [isFocused]);
 
   const steps = () => {
@@ -97,7 +100,7 @@ export default function OnPressSend({ navigation }) {
         return (
           <>
             <Text style={[styles.titleHome, { color: "#fff" }]}>
-              Qual valor você quer transferir?
+              Qual valorPix você quer transferir?
             </Text>
             <Text
               style={{
@@ -108,45 +111,20 @@ export default function OnPressSend({ navigation }) {
               }}
             >
               Saldo da conta {" "}
-              <Text style={{ color: "#34E167" }}>R${formatReal(users.saldo)}</Text>
+              <Text style={{ color: "#34E167" }}>{formatReal(users.saldo)}</Text>
             </Text>
             <TextInput
               style={styles.input}
               placeholder="Valor R$"
               keyboardType="numeric"
               placeholderTextColor="#888"
-              value={valor}
+              value={valorPix}
               onChangeText={setValor}
             />
           </>
-        );
+        )
 
       case 2:
-        return (
-          <>
-            <Text style={{ fontSize: 26, fontWeight: "500", color: "#fff" }}>
-              Para quem você quer transferir o Pix?
-              <Text
-                style={{ fontSize: 26, fontWeight: "400", color: "#34E167" }}
-              >
-                R${" "}
-                 {formatReal(valor)}
-              </Text>
-            </Text>
-            <Text style={{ paddingVertical: 8, fontSize: 16, color: "#fff" }}>
-              Encontre um contato na sua lista ou inicie uma nova transferência
-            </Text>
-            <TextInput
-              style={[styles.input, { marginTop: 16 }]}
-              placeholder="Nome, CPF/CNPJ ou chave Pix"
-              placeholderTextColor="#888"
-              value={chave_pix}
-              onChangeText={setChavePix}
-            />
-          </>
-        );
-
-      case 3:
         return (
           <View style={{ paddingVertical: 8, paddingBottom: 12 }}>
             <Text
@@ -167,7 +145,7 @@ export default function OnPressSend({ navigation }) {
                 fontSize: 42,
               }}
             >
-             <Text style={{ color: "#34E167" }}> R${" "}{ formatReal(valor)}</Text>
+             <Text style={{ color: "#34E167" }}> {" "}{ formatReal(valorPix)}</Text>
             </Text>
             <Text
               style={{
@@ -181,7 +159,7 @@ export default function OnPressSend({ navigation }) {
             >
               CPF/Chave Pix: {""}
               <Text style={{ color: "#34E167", fontWeight: "400"  }}>
-                {chave_pix}
+                {chavePix}
               </Text>
             </Text>
           </View>
@@ -243,22 +221,22 @@ export default function OnPressSend({ navigation }) {
             </Button>
           )}
 
-          {step < 3 && (
+          {step < 2 && (
             <Button
               mode="contained"
               onPress={() => setStep((s) => s + 1)}
               style={{ backgroundColor: "#34E167", width: "50%", padding: 4 }}
               labelStyle={{ color: "#000" }}
-              disabled={!valor || (step === 2 && !chave_pix)}
+              disabled={!valorPix || (step === 2 && !chave_pix)}
             >
               Avançar
             </Button>
           )}
-          {step === 3 && (
+          {step === 2 && (
             <Button
               mode="contained"
               onPress={sendPix}
-              disabled={!chave_pix || !valor}
+              disabled={!chave_pix || !valorPix}
               style={{ width: "50%", padding: 4, backgroundColor: "#34E167" }}
               labelStyle={{ color: "#000" }}
             >

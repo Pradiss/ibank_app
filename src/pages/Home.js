@@ -35,7 +35,7 @@ export default function Home({ navigation }) {
       const response = await apiClient.get(`/${id}`, {
         headers: {
           "id-bank": "02",
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
       setUsers(response.data);
@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
       const res = await apiTransacao.get(`${id}`, {
         headers: {
           "id-bank": "02",
-          Authorization: `Bearer ${token}`,
+         'Authorization': `Bearer ${token}`,
         },
       });
 
@@ -174,7 +174,7 @@ export default function Home({ navigation }) {
           data={contatosFiltrados}
           keyExtractor={(item) => item.id_transacao.toString()}
           renderItem={({ item }) => (
-            <CarouselProfile item={item} navigation={navigation} />
+            <CarouselProfile item={item} navigation={navigation}  />
           )}
         />
       </View>

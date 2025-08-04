@@ -183,6 +183,7 @@ export default function ScreenSend({ navigation }) {
                 {chave_pix}
               </Text>
             </Text>
+
           </View>
         );
 

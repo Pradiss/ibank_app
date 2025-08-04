@@ -1,10 +1,14 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { Avatar } from "react-native-paper";
 import styles from "./Style";
 
+
+
 export function CarouselProfile({ item, navigation }) {
+
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("OnPressSend", {item: item.name})}>
+    <TouchableOpacity onPress={() => navigation.navigate("OnPressSend")}>
       <View style={styles.blocoCard}>
         <Avatar.Image
           size={46}
