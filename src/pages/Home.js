@@ -96,7 +96,7 @@ export default function Home({ navigation }) {
         Meus Saldo
       </Text>
           <View style={{ flexDirection: "row",justifyContent:"space-between", alignItems:"center"  }}>
-              <Text style={styles.price}>R${showEye ? formatReal(users.saldo) : "••••••"}</Text>
+              <Text style={styles.price}>{showEye ? formatReal(users.saldo) : "••••••"}</Text>
               <MaterialCommunityIcons
                 style={styles.icon}
                 name={showEye ? "eye" : "eye-off"}

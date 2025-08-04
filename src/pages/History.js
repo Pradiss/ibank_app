@@ -96,7 +96,7 @@ export default function History({ navigation }) {
                 }}
               >
                 <Text style={styles.price}>
-                  R${showEye ? formatReal(users.saldo) : "••••••"}
+                  {showEye ? formatReal(users.saldo) : "••••••"}
                 </Text>
                 <MaterialCommunityIcons
                   style={styles.icon}

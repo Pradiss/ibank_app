@@ -49,6 +49,9 @@ export const formatReal = (value) => {
   );
 
   return isNaN(numero)
-    ? "0,00"
-    : numero.toFixed(2).replace(".", ",");
+    ? "R$ 0,00"
+    : new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(numero);
 };

@@ -107,7 +107,7 @@ export default function ScreenSend({ navigation }) {
               }}
             >
               Saldo da conta {" "}
-              <Text style={{ color: "#34E167" }}>R${formatReal(users.saldo)}</Text>
+              <Text style={{ color: "#34E167" }}>{formatReal(users.saldo)}</Text>
             </Text>
             <TextInput
               style={styles.input}
@@ -128,7 +128,7 @@ export default function ScreenSend({ navigation }) {
               <Text
                 style={{ fontSize: 26, fontWeight: "400", color: "#34E167" }}
               >
-                R${" "}
+                {" "}
                  {formatReal(valor)}
               </Text>
             </Text>
@@ -166,7 +166,7 @@ export default function ScreenSend({ navigation }) {
                 fontSize: 42,
               }}
             >
-             <Text style={{ color: "#34E167" }}> R${" "}{ formatReal(valor)}</Text>
+             <Text style={{ color: "#34E167" }}> {" "}{ formatReal(valor)}</Text>
             </Text>
             <Text
               style={{
