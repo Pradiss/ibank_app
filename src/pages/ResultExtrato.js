@@ -76,7 +76,7 @@ export default function ResultExtrato({ navigation }) {
                 Transferido
               </Text>
               <Text style={[styles.price, { color: "#34E167", marginBottom: 8 }]}>
-                R${ultimoPix.valor}
+                R${formatReal(ultimoPix.valor)}
               </Text>
               <Text style={{ color: "#999", fontSize: 16 }}>
                 para{" "}

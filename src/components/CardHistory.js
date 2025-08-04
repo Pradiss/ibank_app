@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-paper";
+import { formatReal } from "../mask/mascara";
 
 export function CardHistory({ item, navigation }) {
   return (
@@ -28,7 +29,7 @@ export function CardHistory({ item, navigation }) {
         </View>
 
         <View style={{flex:1, alignItems: "flex-end"  ,gap:8}}>
-          <Text style={{ color: "#000", fontSize: 16 }}>R${item.valor}</Text>
+          <Text style={{ color: "#000", fontSize: 16 }}>R${formatReal(item.valor)}</Text>
           <Text style={{ color: "#555", fontSize: 14 }}>{item.data_hora}</Text>
         </View>
       </View>

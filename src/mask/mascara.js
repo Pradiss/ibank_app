@@ -43,17 +43,12 @@ export const formatUF = (value) =>
     .toUpperCase() 
     .slice(0, 2);
 
-
 export const formatReal = (value) => {
-  if (typeof value === "string") {
-    value = value.replace(",", "."); // converte vírgula para ponto
-  }
+  const numero = parseFloat(
+    typeof value === "string" ? value.replace(",", ".") : value
+  );
 
-  const numero = parseFloat(value);
-  if (isNaN(numero)) return "0,00";
-
-  return numero.toLocaleString("pt-BR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+  return isNaN(numero)
+    ? "0,00"
+    : numero.toFixed(2).replace(".", ",");
 };
